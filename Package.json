@@ -9,7 +9,8 @@
   "license": "AGPL-3.0",
   "dependencies": {
     "express": ">4.7.0",
-    "mongoose": ">3.6.0"
+    "mongoose": ">3.6.0",
+    "swig": "^1.4.2"
   },
   "contributors": [
     "Aitor González Fernández <reimashi@gmail.com> (https://plus.google.com/u/0/+AitorGonzálezFernández)",
@@ -22,9 +23,10 @@
   },
   "private": true,
   "config": {
-    "port": "80"
+    "port": "80",
+    "debug": true
   },
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   }
