@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Bisbardas{% if title %} - {{ title }}{% endif %}</title>
+    <link href="static/css/common.css" rel=stylesheet type="text/css" />
+    {% for script in csscripts %}
+    <link href="{{ script }}" rel=stylesheet type="text/css" />
+    {% endfor %}
+    <script type="text/javascript" src="static/js/jquery-2.min.js"></script>
+    {% for script in jscripts %}
+    <script type="text/javascript" src="{{ script }}"></script>
+    {% endfor %}
+  </head>
+  <body>
+    <div id="bb-head-container">
+      <div id="container-title">&nbsp;
+        <div id="head-title">
+          <img src="static/img/title.png" />
+        </div>
+        {% if loguedin %}
+        <div id="head-profile">
+          <div id="profile-logout">
+            <button>Cerrar sesión</button>
+          </div>
+          <div id="profile-photo">
+            <a href="#"><img src="{{ userinfo.photo }}"/></a>
+          </div>
+        </div>
+        {% else %}
+        <div id="head-login">
+          <form name="form-login" action="/login" method="POST">
+            <div class="form-login">
+              <div class="form-login-elem form-login-input" title="Usuario"><img src="static/img/people.png" /><input type="text" name="username" /></div>
+              <div class="form-login-elem form-login-input" title="Contraseña"><img src="static/img/authenticator.png" /><input type="password" name="password" /></div>
+              <div class="form-login-elem form-login-button"><input type="submit" value="Iniciar sesión"></div>
+            </div>
+          </form>
+        </div>
+        {% endif %}
+      </div>
+      <div id="container-menu">
+        <div id="head-menu">
+          <ul>
+            {% if loguedin %}
+            <li><a href="#" title="Home"><img src="static/img/home.png"/></a></li>
+            <li><a href="#" title="Mensajes"><img src="static/img/mail_ru.png"/></a></li>
+            <li><a href="#" title="Amigos"><img src="static/img/people.png"/></a></li>
+            {% endif %}
+          </ul>
+        </div>
+        <div id="head-userinfo">
+          {% if loguedin %}
+          <span>Hola, {{ userinfo.name }}</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div id="bb-body-container">
+      {% if content %}
+        {% for element in content %}
+          {% content %}
+        {% endfor %}
+      {% else %}
+        {# FIXME: Mostrar pagina de error. #}
+        <br><br><br><br><br><br><br><br><br><br>Pagina no renderizada.
+      {% endif %}
+    </div>
+  </body>
+</html>
