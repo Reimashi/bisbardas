@@ -1,0 +1,286 @@
+/* CSS Reset */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+  outline: none;
+}
+
+/* ********* Estilo de bisbardas *************************** */
+
+body {
+  background: #f6f6f6;
+}
+
+input[type="submit"], button {
+  background: #199e8c;
+  margin: 0px;
+  padding: 6px 8px;
+  border: 0px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+/* ********* Estilo de bisbardas - Cabecera **************** */
+
+#bb-head-container {
+  position: fixed;
+  min-width: 800px;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 180px;
+  background: #2a5db1;
+}
+
+#bb-head-container #container-title {
+  display: block;
+  width: 100%;
+  height: 150px;
+  background: #446fb8;
+}
+
+#bb-head-container #head-title img {
+  float: left;
+  margin-left: 60px;
+  height: 100px;
+}
+
+#bb-head-container #head-login {
+  float: right;
+  margin-top: 10px;
+  margin-right: 60px;
+}
+
+#bb-head-container #head-profile {
+	float: right;
+	margin-right: 60px;
+}
+
+#bb-head-container #profile-photo {
+margin: 82px auto 0 auto;
+}
+
+#bb-head-container #profile-photo img {
+width: 83px;
+height: 83px;
+border: 7px solid #199e8c;
+border-radius: 8px;
+}
+
+#bb-head-container #profile-logout {
+	float: right;
+}
+
+#head-menu {
+	position: relative;
+	top: -12px;
+	left: 60px;
+}
+
+#head-menu li{
+	float: left;
+	margin-right: 16px;
+}
+
+#head-menu li img{
+	width: 42px;
+	height: 42px;
+}
+
+#head-userinfo {
+	float: right;
+	line-height: 30px;
+	margin: 0px 18px;
+	color: #fff;
+	line-weight: bold;
+}
+
+.form-login .form-login-elem  {
+  margin: 3px;
+}
+
+.form-login .form-login-input {
+  display: block;
+  height: 30px;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.form-login .form-login-input img {
+float: left;
+  height: 24px;
+  margin: 3px;
+}
+
+.form-login .form-login-input input[type="text"],
+.form-login .form-login-input input[type="password"] {
+  display: inline-block;
+  float: left;
+  height: 28px;
+  margin: 0px 5px;
+  border: 0px;
+}
+
+.form-login .form-login-button {
+  float: right;
+}
+
+/* ********* Estilo de bisbardas - Cuerpo **************** */
+
+#bb-body-container {
+  margin: 200px auto 0px auto;
+  max-width: 1200px;
+}
+
+/* ********* Estilo de bisbardas - Formulario de registro ** */
+
+.form-registry {
+  background: #fff;
+  border: 2px solid #c6c6c6;
+  border-radius: 8px;
+  width: 600px;
+  margin: 0px auto;
+  padding: 8px 12px;
+}
+
+.form-registry .title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.form-registry .info {
+  font-size: 1.1em;
+  margin: 6px 0;
+}
+
+.form-registry .form {
+  margin: 24px auto 14px auto;
+}
+
+.form-line {
+  display: block;
+  max-width: 380px;
+  margin: 2px auto;
+}
+
+.form-line-title {
+  display: inline-block;
+  padding: 0px 4px;
+  width: 180px;
+  height: 20px;
+  text-align: right;
+}
+
+.form-line-input {
+  width: 180px;
+}
+
+.form-line-input input {
+  display: inline-block;
+  width: 180px;
+  height: 20px;
+  border: 2px solid #c6c6c6;
+  border-radius: 3px;
+}
+
+.form-line-space {
+  margin: 6px;
+}
+
+/* ********* Estilo de bisbardas - Entrada en el muro ***** */
+
+.bb-post {
+  width: 800px;
+  margin: 12px auto;
+  background: #fff;
+  border: 2px solid #c6c6c6;
+  border-radius: 8px;
+	position:relative;
+	z-index: -1;
+}
+
+.bb-post .post-image {
+  display: inline-block;
+  float: left;
+  width: 320px;
+}
+
+.bb-post .post-image img {
+  width: 300px;
+  margin: 10px;
+	box-shadow: 0px 0px 4px #bbb;
+}
+
+.bb-post .post-body {
+  display: inline;
+  float: left;
+  width: 464px;
+	margin: 8px 8px;
+}
+
+.bb-post .post-body .title {
+	margin: 3px 0px;
+	font-weight: bold;
+	font-size: 1.15em;
+}
+
+.bb-post .post-body .content {
+	margin: 16px 0px;
+	text-align: justify;
+	line-height: 20px;
+}
+
+.bb-post .post-body .content .mtext {
+	float: right;
+}
+
+.bb-post .post-body .social {
+	width: 464px;
+	position:absolute;
+	bottom: 10px;
+
+}
+
+.bb-post .post-body .social span {
+	float: right;
+	margin: 0px 4px;
+	line-height: 22px;
+}
+
+.bb-post .post-body .social span.social-resume {
+	line-height: 34px;
+}
