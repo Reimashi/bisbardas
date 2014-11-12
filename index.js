@@ -1,14 +1,17 @@
-var express         = require("express");
+var express         = require('express');
+var path            = require('path');
+var swig            = require('swig');
+
 var app             = express();
 var config          = require('./package').config;
-var swig            = require('swig');
+var db              = require('./db');
 
 // Establecemos la configuración de la plantillas Swig.
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
-app.set('view cache', config.debug);
-swig.setDefaults({ cache: config.debug });
+app.set('view cache', !config.debug);
+swig.setDefaults({ cache: config.debug ? false : 'memory' });
 
 // Estableciendo las rutas
 
@@ -17,7 +20,7 @@ var router = express.Router();
 var homeController = require('./controllers/home-controller');
 var authController = require('./controllers/auth-controller');
 var userController = require('./controllers/user-controller');
-var friendsController = require('./controllers/friends-controller');
+var friendController = require('./controllers/friend-controller');
 var wallController = require('./controllers/wall-controller');
 
 router.route('/')
@@ -65,6 +68,16 @@ router.route('/wall/:id/delete')
 
 app.use(router);
 
+// Conectamos con la base de datos
+db.connect();
+
+// Iniciamos el servidor
 app.listen(config.port, function() {
-  	console.log("Servidor web iniciado (Puerto: " + config.port + ").");
+	console.log("INFO (index.js) - Servidor web iniciado (Puerto: " + config.port + ").");
+});
+
+process.on('SIGINT', function() {
+	console.log("INFO (index.js) - Apagando servidor web...");
+	db.disconnect();
+	process.exit(0);
 });
