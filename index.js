@@ -14,9 +14,9 @@ app.set('view cache', !config.debug);
 swig.setDefaults({ cache: config.debug ? false : 'memory' });
 
 // Estableciendo las rutas
-
 var router = express.Router();
 
+//var fileController = require('./controllers/file-controller');
 var homeController = require('./controllers/home-controller');
 var authController = require('./controllers/auth-controller');
 var userController = require('./controllers/user-controller');
@@ -67,6 +67,9 @@ router.route('/wall/:id/delete')
 	.get(wallController.deletePost);
 
 app.use(router);
+
+// Establecemos la carpeta de archivos estaticos
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 // Conectamos con la base de datos
 db.connect();
