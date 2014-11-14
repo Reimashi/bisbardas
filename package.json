@@ -1,0 +1,38 @@
+{
+  "name": "bisbardas",
+  "description": "Servidor de la web personal de Aitor González Fernández",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Reimashi/bisbardas",
+  "bugs": {
+    "url": "https://github.com/Reimashi/bisbardas/issues"
+  },
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "express": ">4.7.0",
+    "mongoose": ">3.6.0",
+    "swig": "^1.4.2"
+  },
+  "contributors": [
+    "Aitor González Fernández <reimashi@gmail.com> (https://plus.google.com/u/0/+AitorGonzálezFernández)",
+    "Hector Riopedre López <riopedre2001@gmail.com> (https://plus.google.com/u/0/+HectorRiopedreLopez)",
+    "Adrián González Barbosa <adrian.gonzalez.barbosa@gmail.com> (https://plus.google.com/u/0/+AdrianGonzalezBarbosa)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Reimashi/bisbardas.git"
+  },
+  "private": true,
+  "config": {
+    "port": 80,
+    "database": {
+      "host": "localhost",
+      "port": 27017,
+      "dbname": "bisbardas"
+    },
+    "debug": true
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  }
+}
