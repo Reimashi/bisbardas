@@ -15,7 +15,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view cache', !config.debug);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(multer);
 swig.setDefaults({ cache: config.debug ? false : 'memory' });
 
 // Estableciendo las rutas
