@@ -59,7 +59,7 @@
     <div id="bb-body-container">
       {% if content %}
         {% for element in content %}
-          {% content %}
+          {{ element|safe }}
         {% endfor %}
       {% else %}
         {# FIXME: Mostrar pagina de error. #}
