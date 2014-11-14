@@ -16,7 +16,6 @@ swig.setDefaults({ cache: config.debug ? false : 'memory' });
 // Estableciendo las rutas
 var router = express.Router();
 
-//var fileController = require('./controllers/file-controller');
 var homeController = require('./controllers/home-controller');
 var authController = require('./controllers/auth-controller');
 var userController = require('./controllers/user-controller');
