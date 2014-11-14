@@ -1,39 +1,39 @@
 <div class="bb-post">
   <div class="post-image">
-    <img src="{{ post.image }}">
+    <img src="{{ image }}">
   </div>
   <div class="post-body">
     <div class="title">
-      {{ post.title }}
+      {{ title }}
     </div>
     <div class="content">
       <div class="ctext">
-        <p>{{ post.resume }}</p>
+        <p>{{ resume }}</p>
       </div>
       <div class="mtext">
         <span class="more-tag"><a href="#">... leer la noticia completa.</a></span>
       </div>
     </div>
     <div class="social">
-      {% if post.userlike %}
+      {% if userlike %}
       <span class="like-button"><button>Ya no me gusta</button></span>
       {% else %}
       <span class="like-button"><button>Me gusta</button></span>
       {% endif %}
       <span class="social-resume">
-        {% if post.userlike %}
-          {% if post.likes < 1 %}
+        {% if userlike %}
+          {% if likes < 1 %}
             A ti te gusta esto.
-          {% else if post.likes == 1 %}
+          {% elseif likes == 1 %}
             A ti y a 1 persona más os gusta esto.
           {% else %}
-            A ti y a {{ post.likes }} personas más os gusta esto.
+            A ti y a {{ likes }} personas más os gusta esto.
           {% endif %}
         {% else %}
-          {% if post.likes == 1 %}
+          {% if likes == 1 %}
             A 1 persona le gusta esto.
           {% else %}
-            A {{ post.likes }} personas les gusta esto.
+            A {{ likes }} personas les gusta esto.
           {% endif %}
         {% endif %}
       </span>
