@@ -2,7 +2,7 @@ var express         = require('express');
 var path            = require('path');
 var swig            = require('swig');
 var bodyParser      = require('body-parser');
-var multer          = require('multer');
+
 
 var app             = express();
 var config          = require('./package').config;
