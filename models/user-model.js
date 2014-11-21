@@ -20,3 +20,5 @@ var userSchema = new Schema ({
 userSchema.virtual('name.full').get(function () {
   return this.name.first + ' ' + this.name.last;
 });
+
+mongoose.model('User', userSchema);
