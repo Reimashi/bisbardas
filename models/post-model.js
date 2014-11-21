@@ -5,13 +5,14 @@ var postSchema = new Schema ({
   title:      { type: String, required: true },
   body:       { type: String, required: true },
   author:     { type: Schema.Types.ObjectId, ref: 'User' },
+  createdAt:  { type : Date, default : Date.now },
   likes:      [{
       user:   { type: Schema.Types.ObjectId, ref: 'User' }
   }],
   comments    [{
       body:         { type: String, required: true },
       user:         { type: Schema.Types.ObjectId, ref: 'User' },
-      created:      { type : Date, default : Date.now }
+      createdAt:    { type : Date, default : Date.now }
   }]
 });
 
