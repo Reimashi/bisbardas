@@ -1,12 +1,16 @@
 var express         = require('express');
 var path            = require('path');
 var swig            = require('swig');
+var passport 		= require('passport');
 var bodyParser      = require('body-parser');
 
 
 var app             = express();
 var config          = require('./package').config;
 var db              = require('./db');
+
+// Establecemos la configuración de passport
+require('./config/passport')(passport);
 
 // Establecemos la configuración de la plantillas Swig.
 app.engine('html', swig.renderFile);
