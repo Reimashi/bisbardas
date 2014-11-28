@@ -22,3 +22,7 @@ userSchema.virtual('name.full').get(function () {
 });
 
 mongoose.model('User', userSchema);
+
+module.exports = function () {
+    return mongoose.model('User');
+}

@@ -9,7 +9,7 @@ var postSchema = new Schema ({
   likes:      [{
       user:   { type: Schema.Types.ObjectId, ref: 'User' }
   }],
-  comments    [{
+  comments:   [{
       body:         { type: String, required: true },
       user:         { type: Schema.Types.ObjectId, ref: 'User' },
       createdAt:    { type : Date, default : Date.now }
@@ -32,7 +32,7 @@ postSchema.methods = {
         if (~index) return cb('Este usuario ya le habia dado a like.');
         else {
             this.likes.push({
-                user: user._id;
+                user: user._id
             });
             this.save(cb);
         }
@@ -58,3 +58,7 @@ postSchema.statics = {
 }
 
 mongoose.model('Post', postSchema);
+
+module.exports = function () {
+    return mongoose.model('Post');
+}

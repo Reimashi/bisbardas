@@ -26,3 +26,7 @@ postSchema.statics = {
 }
 
 mongoose.model('Friend', friendSchema);
+
+module.exports = function () {
+    return mongoose.model('Friend');
+}
