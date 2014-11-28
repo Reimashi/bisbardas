@@ -191,6 +191,15 @@ float: left;
   margin: 24px auto 14px auto;
 }
 
+.form-login-large {
+	background: #fff;
+	border: 2px solid #c6c6c6;
+	border-radius: 8px;
+	width: 380px;
+	margin: 0px auto;
+	padding: 8px 12px;
+}
+
 .form-line {
   display: block;
   max-width: 380px;
@@ -207,6 +216,12 @@ float: left;
 
 .form-line-input {
   width: 180px;
+}
+
+.form-line-error {
+	display: block;
+	color: #f00;
+	text-align: center;
 }
 
 .form-line-input input {
