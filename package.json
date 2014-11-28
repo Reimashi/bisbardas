@@ -10,6 +10,7 @@
   "dependencies": {
     "body-parser": "^1.9.2",
     "express": ">4.7.0",
+    "express-validator": "^2.7.0",
     "mongoose": ">3.6.0",
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
@@ -25,15 +26,6 @@
     "url": "https://github.com/Reimashi/bisbardas.git"
   },
   "private": true,
-  "config": {
-    "port": 80,
-    "database": {
-      "host": "localhost",
-      "port": 27017,
-      "dbname": "bisbardas"
-    },
-    "debug": true
-  },
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
