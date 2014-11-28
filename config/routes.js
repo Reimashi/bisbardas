@@ -9,7 +9,7 @@ module.exports = function (router) {
     .get(homeController.index);
 
     router.route('/auth')
-    .get(authController.login)
+    .get(authController.index)
     .post(authController.login);
 
     router.route('/auth/logout')
