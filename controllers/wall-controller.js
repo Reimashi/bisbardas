@@ -1,7 +1,7 @@
 var swig 			= require('swig');
 var mongoose 		= require ('mongoose');
 var validator 		= require('express-validator');
-var postModel 		= mongoose.model('Post');
+var postModel 		= require('../models/post-model')();
 
 
 
