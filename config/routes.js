@@ -8,43 +8,49 @@ module.exports = function (router) {
     router.route('/')
     .get(homeController.index);
 
-    router.route('/auth')
+    router.route('/auth/login')
     .get(authController.index)
     .post(authController.login);
 
     router.route('/auth/logout')
-    .get(authController.logout);
+    .get(authController.logout, passport.authenticate('local', { failureRedirect: '/' }));
 
-    router.route('/user/:id')
-    .get(userController.index)
+    router.route('/user/show/:id')
+    .get(userController.index, passport.authenticate('local', { failureRedirect: '/auth/login' }));
+
+    router.route('/user/add')
+    .get(userController.addForm)
     .post(userController.add);
 
-    router.route('/user/:id/modify')
-    .get(userController.modify);
+    router.route('/user/modify')
+    .get(userController.modify, passport.authenticate('local', { failureRedirect: '/auth/login' }));
 
-    router.route('/user/:id/delete')
-    .get(userController.delete);
+    router.route('/user/delete')
+    .get(userController.delete, passport.authenticate('local', { failureRedirect: '/auth/login' }));
 
     router.route('/friends')
-    .get(friendController.index)
-    .post(friendController.add);
+    .get(friendController.index, passport.authenticate('local', { failureRedirect: '/auth/login' }))
+    .post(friendController.add, passport.authenticate('local', { failureRedirect: '/auth/login' }));
 
-    router.route('/friends/:id/accept')
-    .get(friendController.accept);
+    router.route('/friends/accept/:id')
+    .get(friendController.accept, passport.authenticate('local', { failureRedirect: '/auth/login' }));
 
-    router.route('/friends/:id/ignore')
-    .get(friendController.ignore);
+    router.route('/friends/ignore/:id')
+    .get(friendController.ignore, passport.authenticate('local', { failureRedirect: '/auth/login' }));
 
-    router.route('/friends/:id/delete')
-    .get(friendController.delete);
+    router.route('/friends/delete/:id')
+    .get(friendController.delete, passport.authenticate('local', { failureRedirect: '/auth/login' }));
 
     router.route('/wall')
-    .get(wallController.index)
-    .post(wallController.addPost);
+    .get(wallController.index, passport.authenticate('local', { failureRedirect: '/auth/login' }));
 
-    router.route('/wall/:id')
-    .get(wallController.getPost);
+    router.route('/post/add')
+    .get(wallController.addPostForm, passport.authenticate('local', { failureRedirect: '/auth/login' }))
+    .post(wallController.addPost, passport.authenticate('local', { failureRedirect: '/auth/login' }));
 
-    router.route('/wall/:id/delete')
+    router.route('/post/show/:id')
+    .get(wallController.getPost, passport.authenticate('local', { failureRedirect: '/auth/login' }));
+
+    router.route('/post/delete/:id', passport.authenticate('local', { failureRedirect: '/auth/login' }))
     .get(wallController.deletePost);
 }
