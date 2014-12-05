@@ -32,6 +32,10 @@ exports.add = function(req, res) {
 	}*/
 }
 
+exports.addForm = function(req, res) {
+
+}
+
 // TODO: Modifica los datos de un usuario
 exports.modify = function(req, res) {
 	//suponemos que se muestra un formulario con los datos previos ya cubiertos

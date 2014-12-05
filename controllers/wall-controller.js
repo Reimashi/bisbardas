@@ -44,6 +44,11 @@ exports.addPost = function(req, res) {
 
 }
 
+// En este muestra el formulario y en el anterior maneja la respuesta
+exports.addPostForm = function(req, res) {
+
+}
+
 // TODO: Obtiene un post en concreto
 exports.getPost = function(req, res) {
 	var piecepost = swig.compileFile('views/piece-post.html');
@@ -63,8 +68,6 @@ exports.getPost = function(req, res) {
 			}
 		}
 	);
-
-
 }
 
 // TODO: Borra el post pasado como parametro

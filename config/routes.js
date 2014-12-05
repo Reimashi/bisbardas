@@ -1,3 +1,5 @@
+var passport = require('passport');
+
 module.exports = function (router) {
     var homeController = require('../controllers/home-controller');
     var authController = require('../controllers/auth-controller');
