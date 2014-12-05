@@ -5,11 +5,15 @@ var userModel 		= require('../models/user-model')();
 
 // TODO: Genera la pagina de perfil del usuario
 exports.index = function(req, res) {
+	var baseweb = swig.compileFile('views/base.html');
+	res.status(200);
+	res.send(baseweb({}));
+	res.end();
 }
 
 // TODO: Añade un nuevo usuario (Registro)
 exports.add = function(req, res) {
-	req.checkBody('username', 'El email no puede estar vacio').notEmpty();
+	/*req.checkBody('username', 'El email no puede estar vacio').notEmpty();
         req.checkBody('password', 'La contraseña no puede estar vacia').notEmpty();
         req.checkBody('password2', 'Por favor repite la contraseña').notEmpty();
 		//Falta comprobar que sean iguales
@@ -25,7 +29,7 @@ exports.add = function(req, res) {
 	else {
 		var newUser = new userModel(req.body);
 		res.send("Usuario creado correctamente");
-	}
+	}*/
 }
 
 // TODO: Modifica los datos de un usuario
