@@ -7,18 +7,12 @@ exports.index = function(req, res) {
   var baseweb = swig.compileFile('views/base.html');
   var piecefriend = swig.compileFile('views/piece-friend.html');
 
-  friendModel.list(20, 0, function (err, posts) {
-    var friendsRenders = Array();
-    //Renderiza los posts
-    friend.forEach(function(post) {
-      //Revisar
-      friendsRenders.push(piecefriend(post));
-    });
-    res.status(200);
-    //Manda todo
-    res.send(baseweb({content: postsRenders}));
-    res.end();
-  });
+  var viewparams = {
+    'content': [piecefriend()]
+  }
+  res.status(200);
+  res.send(baseweb(viewparams));
+  res.end();
 }
 
 // TODO: Añade una peticion de amistad
