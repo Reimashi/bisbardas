@@ -13,23 +13,58 @@ exports.index = function(req, res) {
 
 // TODO: Añade un nuevo usuario (Registro)
 exports.add = function(req, res) {
-	/*req.checkBody('username', 'El email no puede estar vacio').notEmpty();
-        req.checkBody('password', 'La contraseña no puede estar vacia').notEmpty();
-        req.checkBody('password2', 'Por favor repite la contraseña').notEmpty();
-		//Falta comprobar que sean iguales
-        req.checkBody('firstname', 'El Nombre no puede estar vacio').notEmpty();
-        req.checkBody('lastname', 'Los apellidos no pueden estar vacios').notEmpty();
+	if (req.param('username') == 'reguser') {
+		var baseweb = swig.compileFile('views/base.html');
 
-	var errors = req.validationErrors();
-  	console.log(errors);
+		req.checkBody('username', 'El email no puede estar vacio.').notEmpty();
+		req.checkBody('username', 'El email no es correcto.').isEmail();
+		req.checkBody('password', 'La contraseña no puede estar vacia.').notEmpty();
+		req.checkBody('password', 'La contraseña debe estar compuesta por caracteres alfanuméricos.').isAlphanumeric();
+		req.checkBody('password', 'La contraseña debe tener un tamaño de entre 6 y 24 caracteres.').len(6, 24);
+	    req.checkBody('firstname', 'El Nombre no puede estar vacio').notEmpty();
+	    req.checkBody('lastname', 'Los apellidos no pueden estar vacios').notEmpty();
 
-  	if (errors) {
-    		res.send("Errores en formulario");
+		req.sanitize('username').normalizeEmail().toString();
+		req.sanitize('password').toString();
+		req.sanitize('firstname').toString();
+		req.sanitize('lastname').toString();
+
+		var errors = req.validationErrors();
+	  	console.log(errors);
+
+	  	if (errors) {
+			var formreg = swig.compileFile('views/form-registry.html');
+
+			res.status(200);
+			res.send(baseweb({content: [formreg({"form-error" : errors})]}));
+			res.end();
+		}
+		else {
+			var userdata = {
+				email: req.param('username'),
+				name: {
+					first: req.param('firstname'),
+					last: req.param('lastname')
+				},
+				password: req.param('password')
+			};
+
+			var newUser = new userModel(userdata);
+
+			var formreg = swig.compileFile('views/form-registry-success.html');
+
+			res.status(200);
+			res.send(baseweb({content: [formreg({})]}));
+			res.end();
+		}
 	}
 	else {
-		var newUser = new userModel(req.body);
-		res.send("Usuario creado correctamente");
-	}*/
+		var formreg = swig.compileFile('views/form-registry.html');
+
+		res.status(200);
+		res.send(baseweb({content: [formreg()]}));
+		res.end();
+	}
 }
 
 exports.addForm = function(req, res) {

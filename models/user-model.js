@@ -2,7 +2,6 @@ var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
 
 var userSchema = new Schema ({
-  alias:      { type: String, index: true, required: true },
   email: {
     type: String,
     index: true, required: true,
