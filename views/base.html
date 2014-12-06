@@ -21,7 +21,7 @@
         {% if loguedin %}
         <div id="head-profile">
           <div id="profile-logout">
-            <button>Cerrar sesión</button>
+            <button>{% trans %}Logout{% endtrans %}</button>
           </div>
           <div id="profile-photo">
             <a href="#"><img src="{{ userinfo.photo }}"/></a>
@@ -31,9 +31,9 @@
         <div id="head-login">
           <form name="form-login" action="/login" method="POST">
             <div class="form-login">
-              <div class="form-login-elem form-login-input" title="Usuario"><img src="static/img/people.png" /><input type="text" name="username" /></div>
-              <div class="form-login-elem form-login-input" title="Contraseña"><img src="static/img/authenticator.png" /><input type="password" name="password" /></div>
-              <div class="form-login-elem form-login-button"><input type="submit" value="Iniciar sesión"></div>
+              <div class="form-login-elem form-login-input" title="{% trans %}User{% endtrans %}"><img src="static/img/people.png" /><input type="text" name="username" /></div>
+              <div class="form-login-elem form-login-input" title="{% trans %}Password{% endtrans %}"><img src="static/img/authenticator.png" /><input type="password" name="password" /></div>
+              <div class="form-login-elem form-login-button"><input type="submit" value="{% trans %}Login{% endtrans %}"></div>
             </div>
           </form>
         </div>
@@ -43,15 +43,15 @@
         <div id="head-menu">
           <ul>
             {% if loguedin %}
-            <li><a href="#" title="Home"><img src="static/img/home.png"/></a></li>
-            <li><a href="#" title="Mensajes"><img src="static/img/mail_ru.png"/></a></li>
-            <li><a href="#" title="Amigos"><img src="static/img/people.png"/></a></li>
+            <li><a href="#" title="{% trans %}Home{% endtrans %}"><img src="static/img/home.png"/></a></li>
+            <li><a href="#" title="{% trans %}Messages{% endtrans %}"><img src="static/img/mail_ru.png"/></a></li>
+            <li><a href="#" title="{% trans %}Friends{% endtrans %}"><img src="static/img/people.png"/></a></li>
             {% endif %}
           </ul>
         </div>
         <div id="head-userinfo">
           {% if loguedin %}
-          <span>Hola, {{ userinfo.name }}</span>
+          <span>{% trans %}Hello{% endtrans %}, {{ userinfo.name }}</span>
           {% endif %}
         </div>
       </div>
