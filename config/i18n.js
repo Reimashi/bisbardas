@@ -5,6 +5,7 @@ module.exports = function(app) {
     inter.configure({
         locales:['es', 'gl', 'en'],
         defaultLocale: 'es',
+        extension: '.json',
         directory: __dirname + '/languages'
     });
 
