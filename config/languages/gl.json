@@ -3,5 +3,10 @@
     "User": "Usuario",
     "Password": "Contrasinal",
     "Login": "Iniciar sesión",
-    "Logout": "Pechar sesión"
+    "Logout": "Pechar sesión",
+    "Post something": "Di algo",
+    "read the full post": "ler o artículo completo",
+    "Post it": "Publícao",
+    "I don't like this anymore": "Xa non gosto disto",
+    "Like it": "Gosto disto"
 }

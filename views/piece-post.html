@@ -11,14 +11,14 @@
         <p>{{ body }}</p>
       </div>
       <div class="mtext">
-        <span class="more-tag"><a href='/post/get'{{_id}}>... leer la noticia completa.</a></span>
+        <span class="more-tag"><a href='/post/get'+{{_id}}>...{% trans %}read the full post{% endtrans %}</a></span>
       </div>
     </div>
     <div class="social">
       {% if userlike %}
-      <span class="like-button"><button>Ya no me gusta</button></span>
+      <span class="like-button"><button>{% trans %}I don't like this anymore{% endtrans %}</button></span>
       {% else %}
-      <span class="like-button"><button>Me gusta</button></span>
+      <span class="like-button"><button>{% trans %}Like it{% endtrans %}</button></span>
       {% endif %}
       <span class="social-resume">
         {% if userlike %}

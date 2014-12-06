@@ -3,5 +3,10 @@
     "User": "User",
     "Password": "Password",
     "Login": "Login",
-    "Logout": "Logout"
+    "Logout": "Logout",
+    "Post something" : "Post something",
+    "read the full post" : "read the full post",
+    "Post it": "Post it",
+    "I don't like this anymore": "I don't like this anymore",
+    "Like it": "Like it"
 }
