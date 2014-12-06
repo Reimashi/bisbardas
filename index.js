@@ -12,6 +12,9 @@ require('./config/passport')(passport);
 // Establecemos la configuración de la plantillas Swig.
 require('./config/swig')(app);
 
+// Establecemos la configuración del modulo de traducción.
+require('./config/i18n')(app);
+
 // Estableciendo las rutas
 var router = express.Router();
 require('./config/routes')(router);
