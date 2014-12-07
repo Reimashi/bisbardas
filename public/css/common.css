@@ -299,3 +299,46 @@ float: left;
 .bb-post .post-body .social span.social-resume {
 	line-height: 34px;
 }
+
+/* ********* Estilo de bisbardas - Listado amigos ***** */
+
+.bb-friend {
+	width: 800px;
+	margin: 12px auto;
+	background: #fff;
+	border: 2px solid #c6c6c6;
+	border-radius: 8px;
+	position:relative;
+	z-index: -1;
+}
+
+.bb-friend .friend-image {
+	display: inline-block;
+	float: left;
+	width: 120px;
+}
+
+.bb-friend .friend-image img {
+	width: 100px;
+	margin: 10px;
+	box-shadow: 0px 0px 4px #bbb;
+}
+
+.bb-friend .friend-body {
+	display: inline;
+	float: left;
+	width: 464px;
+	margin: 8px 8px;
+}
+
+.bb-friend .friend-body .name {
+	margin: 10px 0px;
+	font-weight: bold;
+	font-size: 1.15em;
+}
+
+.bb-friend .friend-body .data {
+	margin: 5px 0px;
+	text-align: justify;
+	line-height: 20px;
+}

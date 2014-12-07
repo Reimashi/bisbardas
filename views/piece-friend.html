@@ -1,20 +1,22 @@
-<div class="bb-post">
-  <div class="post-image">
+<div class="bb-friend">
+  <div class="friend-image">
     <img src="{{ image }}">
   </div>
-  <div class="post-body">
-    <div class="title">
-      {{ title }}
+  <div class="friend-body">
+    <div class="name">
+      Nombre del amigo
     </div>
-    <div class="content">
+    <div class="data">
       <div class="ctext">
-        <p>{{ body }}</p>
+        <p>Edad, dirección</p>
       </div>
     </div>
     <div class="social">
-      <span class="social-resume">
-        Tu amigo número 1
-      </span>
+      {% if friends %}
+      <span class="friend-button"><button>{% trans %}Remove friend{% endtrans %}</button></span>
+      {% else %}
+      <span class="friend-button"><button>{% trans %}Add friend{% endtrans %}</button></span>
+      {% endif %}
     </div>
   </div>
   <div style="clear: both;"></div>
