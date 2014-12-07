@@ -20,14 +20,14 @@ exports.index = function(req, res) {
     listRes = Array();
     friends.forEach(function(friend) {
       listRes.push(pieceFriend(friend));
+      console.log("listado: " + pieceFriend);
     });
+
+    console.log("listado: " + listRes);
+    res.status(200);
+    res.send(baseweb({'content' : listRes}));
+    res.end();
   });
-
-  console.log("listado: " + listRes);
-
-  res.status(200);
-  res.send(baseweb({'content' : listRes}));
-  res.end();
 };
 
 exports.users = function(req, res) {
@@ -37,18 +37,20 @@ exports.users = function(req, res) {
   var x = mongoose.model('User');
   var usuariosRenders = Array();
   userModel.find({}, function(err, usuarios) {
-      if (!err){
-        usuarios.forEach(function(usuario) {
+    if (!err){
+      usuarios.forEach(function(usuario) {
+        if(!usuario._id.equals(req.session.user._id)){
           console.log(usuario);
           usuariosRenders.push(pieceFriend(usuario));
-        });
-        res.status(200);
-        res.send(baseweb({'content' : usuariosRenders}));
-        res.end();
-      }
-      else { throw err;}
-      }
-    );
+        }
+      });
+      res.status(200);
+      res.send(baseweb({'content' : usuariosRenders}));
+      res.end();
+    }
+    else { throw err;}
+    }
+  );
 };
 
 // TODO: Añade una peticion de amistad
