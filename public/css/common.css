@@ -236,6 +236,28 @@ float: left;
   margin: 6px;
 }
 
+/* ********* Estilo de bisbardas - Mensages genericos ***** */
+
+.message {
+	background: #fff;
+	border: 2px solid #c6c6c6;
+	border-radius: 8px;
+	width: 460px;
+	margin: 0px auto;
+	padding: 8px 12px;
+	text-align: center;
+}
+
+.message .message-text {
+	font-size: 1.2em;
+	line-height: 28px;
+}
+
+.message .message-button a {
+	font-size: 0.9em;
+	text-decoration: none;
+}
+
 /* ********* Estilo de bisbardas - Entrada en el muro ***** */
 
 .bb-post {

@@ -1,0 +1,12 @@
+{% if not baseurl %}
+  {% set baseurl = '' %}
+{% endif %}
+
+<div class="message">
+    <div class="message-text">
+        {% trans %}User registered succesfully{% endtrans %}
+    </div>
+    <div class="message-button">
+        <a href="{{ baseurl }}">{% trans %}Return to home{% endtrans %}</a>
+    </div>
+</div>
