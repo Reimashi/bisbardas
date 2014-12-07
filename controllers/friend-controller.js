@@ -34,7 +34,6 @@ exports.users = function(req, res) {
   var baseweb = swig.compileFile('views/base.html');
   var pieceFriend = swig.compileFile('views/piece-friend.html');
 
-  var x = mongoose.model('User');
   var usuariosRenders = Array();
   userModel.find({}, function(err, usuarios) {
     if (!err){

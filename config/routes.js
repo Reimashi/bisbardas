@@ -46,7 +46,7 @@ module.exports = function (router) {
     .get(checkLogin, friendController.index)
     .post(checkLogin, friendController.add);
 
-    router.route('/friends/search')
+    router.route('/users')
     .get(checkLogin, friendController.users);
 
     router.route('/friends/accept/:id')

@@ -6,7 +6,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Bisbardas{% if title %} - {{ title }}{% endif %}</title>
+    <a href="{{ baseurl }}" title="{% trans %}Home{% endtrans %}"><title>Bisbardas{% if title %} - {{ title }}{% endif %}</title></a>
     <link href="{{ baseurl }}static/css/common.css" rel=stylesheet type="text/css" />
     {% for script in csscripts %}
     <link href="{{ script }}" rel=stylesheet type="text/css" />
@@ -48,9 +48,10 @@
         <div id="head-menu">
           <ul>
             {% if user %}
-            <li><a href="{{ baseurl }}wall" title="{% trans %}Home{% endtrans %}"><img src="{{ baseurl }}static/img/home.png"/></a></li>
-            <li><a href="{{ baseurl }}friends" title="{% trans %}Messages{% endtrans %}"><img src="{{ baseurl }}static/img/mail_ru.png"/></a></li>
-            <li><a href="{{ baseurl }}friends/search" title="{% trans %}Friends{% endtrans %}"><img src="{{ baseurl }}static/img/people.png"/></a></li>
+            <li><a href="{{ baseurl }}" title="{% trans %}Home{% endtrans %}"><img src="{{ baseurl }}static/img/home.png"/></a></li>
+            <li><a href="{{ baseurl }}wall" title="{% trans %}Messages{% endtrans %}"><img src="{{ baseurl }}static/img/mail_ru.png"/></a></li>
+            <li><a href="{{ baseurl }}friends" title="{% trans %}Friends{% endtrans %}"><img src="{{ baseurl }}static/img/people.png"/></a></li>
+            <li><a href="{{ baseurl }}users" title="{% trans %}Users{% endtrans %}"><img src="{{ baseurl }}static/img/users.png"/></a></li>
             {% endif %}
           </ul>
         </div>

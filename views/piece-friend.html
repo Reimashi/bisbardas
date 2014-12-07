@@ -13,9 +13,9 @@
       <span class="friend-button"><button>{% trans %}Block friend{% endtrans %}</button></span>
       {% endif %}
       {% if friends %}
-      <span class="friend-button"><button>{% trans %}Accept user{% endtrans %}</button></span>
-      {% else %}
       <span class="friend-button"><button>{% trans %}Remove friend{% endtrans %}</button></span>
+      {% else %}
+      <span class="friend-button"><input type="submit" value="{% trans %}Add friend{% endtrans %}"/></span>
       {% endif %}
     </div>
   </div>
