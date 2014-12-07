@@ -1,10 +1,14 @@
 var swig 			= require('swig');
 var mongoose 		= require ('mongoose');
+var validator 		= require('express-validator');
+var i18n 		    = require('i18n');
+var url 			= require('url');
 var postModel 		= require('../models/post-model')();
 
 //FIXME: Los "...leer completa" no son clickeables (no se puede mandar al get con ellos, por ende)
 exports.index = function(req, res) {
 	var baseweb = swig.compileFile('views/base.html');
+	var baseurl = 'http://' + req.headers.host + '/';
 	var buttonnew = swig.compileFile('views/button-newpost.html');
 	var piecepost = swig.compileFile('views/piece-post.html');
 
@@ -20,8 +24,10 @@ exports.index = function(req, res) {
 	});
 }
 
+// Metodo POST, solo redirecciones
 exports.addPost = function(req, res) {
-	var baseweb = swig.compileFile('views/base.html');
+	var baseurl = 'http://' + req.headers.host + '/';
+
 	var npost = new postModel(req.body);
 
 	npost.save(function (err) {
@@ -34,15 +40,17 @@ exports.addPost = function(req, res) {
 	});
 }
 
+// TODO: Añade un nuevo post (Wall). Imprime el formulario.
 // FIXME: Por alguna razon hay un "object Object" por ahi metido
 exports.addPostForm = function(req, res) {
+	var baseurl = 'http://' + req.headers.host + '/';
 	var baseweb = swig.compileFile('views/base.html');
-	var piecenewpost = swig.compileFile('views/piece-newpost.html');
+	var piecenewpost = swig.compileFile('views/form-newpost.html');
 
 	piecenewpost();
 	console.log('Yendo a formulario de nuevo post.');
 	res.status(200);
-	res.send(baseweb({content: piecenewpost}));
+	res.send(baseweb({content: piecenewpost, baseurl: baseurl}));
 	res.end();
 }
 
