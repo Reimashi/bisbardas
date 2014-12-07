@@ -6,12 +6,32 @@ var crypto 			= require('crypto');
 var validator 		= require('express-validator');
 var userModel 		= require('../models/user-model')();
 
+function redirectFromPost (req, res, form, path, error) {
+	var baseurl = 'http://' + req.headers.host + '/';
+	req.session.refer = new Array();
+
+	if (error) {
+		req.session.refer = {
+			id: form,
+			postok: false,
+			error: error
+		};
+	}
+	else {
+		req.session.refer = {
+			id: form,
+			postok: true,
+			error: false
+		};
+	}
+
+	res.redirect(baseurl + path);
+}
+
 // TODO: Genera la pagina de perfil del usuario
 exports.index = function(req, res) {
-	var baseweb = swig.compileFile('views/base.html');
-	res.status(200);
-	res.send(baseweb({}));
-	res.end();
+	var baseurl = 'http://' + req.headers.host + '/';
+	res.redirect(baseurl + 'user/modify');
 }
 
 // TODO: Añade un nuevo usuario (Registro). Imprime el formulario.
@@ -24,57 +44,36 @@ exports.addGet = function(req, res) {
 		if (req.session.refer.error) {
 			var error = req.session.refer.error;
 			var formreg = swig.compileFile('views/form-registry.html');
-			formrender = formreg({formerror: error, baseurl: baseurl});
+			formrender = formreg({formerror: error, baseurl: baseur, user: req.session.userl});
 		}
 		else if (req.session.refer.postok) {
 			var formreg = swig.compileFile('views/form-registry-success.html');
-			formrender = formreg({baseurl: baseurl});
+			formrender = formreg({baseurl: baseurl, user: req.session.user});
 		}
 	}
 	else {
 		var formreg = swig.compileFile('views/form-registry.html');
-		formrender = formreg({baseurl: baseurl});
+		formrender = formreg({baseurl: baseurl, user: req.session.user});
 	}
 
 	req.session.refer = new Array();
 	res.status(200);
-	res.send(baseweb({content: [formrender], baseurl: baseurl}));
+	res.send(baseweb({content: [formrender], baseurl: baseurl, user: req.session.user}));
 	res.end();
 }
 
 // TODO: Añade un nuevo usuario (Registro)
 exports.addPost = function(req, res) {
 
-	function redirectAdd (req, res, error) {
-		var baseurl = 'http://' + req.headers.host + '/';
-		req.session.refer = new Array();
-
-		if (error) {
-			req.session.refer = {
-				id: 'user-registry',
-				postok: false,
-				error: error
-			};
-		}
-		else {
-			req.session.refer = {
-				id: 'user-registry',
-				postok: true,
-				error: false
-			};
-		}
-
-		res.redirect(baseurl + 'user/add');
-	}
-
 	if (req.param('form-name') == 'user-registry') {
-		req.checkBody('username', 'El email no puede estar vacio.').notEmpty();
-		req.checkBody('username', 'El email no es correcto.').isEmail();
-		req.checkBody('password', 'La contraseña no puede estar vacia.').notEmpty();
-		req.checkBody('password', 'La contraseña debe estar compuesta por caracteres alfanuméricos.').isAlphanumeric();
-		req.checkBody('password', 'La contraseña debe tener un tamaño de entre 6 y 24 caracteres.').len(6, 24);
-	    req.checkBody('firstname', 'El Nombre no puede estar vacio').notEmpty();
-	    req.checkBody('lastname', 'Los apellidos no pueden estar vacios').notEmpty();
+		req.checkBody('username', i18n.__('El email no puede estar vacio.')).notEmpty();
+		req.checkBody('username', i18n.__('El email no es correcto.')).isEmail();
+		req.checkBody('password', i18n.__('La contraseña no puede estar vacia.')).notEmpty();
+		req.checkBody('password', i18n.__('La contraseña debe estar compuesta por caracteres alfanuméricos.')).isAlphanumeric();
+		req.checkBody('password', i18n.__('La contraseña debe tener un tamaño de entre 6 y 24 caracteres.')).len(6, 24);
+		req.checkBody('password-repeat', i18n.__('Las contraseñas deben coincidir.')).equals(req.param('password'));
+	    req.checkBody('firstname', i18n.__('El Nombre no puede estar vacio')).notEmpty();
+	    req.checkBody('lastname', i18n.__('Los apellidos no pueden estar vacios')).notEmpty();
 
 		req.sanitize('username').normalizeEmail().toString();
 		req.sanitize('password').toString();
@@ -84,7 +83,7 @@ exports.addPost = function(req, res) {
 		var errors = req.validationErrors();
 
 	  	if (errors) {
-			redirectAdd(req, res, errors.shift());
+			redirectFromPost(req, res, 'user-registry', 'user/add', errors.shift());
 		}
 		else {
 			var encpassword = crypto.createHash('sha1');
@@ -102,43 +101,71 @@ exports.addPost = function(req, res) {
 			newUser.save(function(err){
 				if (err) {
 					if (err = "ValidationError: Email already exists") {
-						redirectAdd(req, res, {msg: "This email already has been registrated."});
+						redirectFromPost(req, res, 'user-registry', 'user/add', {msg: i18n.__("This email already has been registrated.")});
 					}
 					else {
-						redirectAdd(req, res, {msg: "Internal error. Contact administrator."});
+						redirectFromPost(req, res, 'user-registry', 'user/add', {msg: i18n.__("Internal error. Contact administrator.")});
 					}
 				}
 				else {
-					redirectAdd(req, res);
+					redirectFromPost(req, res, 'user-registry', 'user/add');
 				}
 			});
 		}
 	}
 	else {
-		redirectAdd(req, res);
+		redirectFromPost(req, res, 'user-registry', 'user/add');
 	}
 }
 
 // TODO: Modifica los datos de un usuario
-exports.modify = function(req, res) {
-	//suponemos que se muestra un formulario con los datos previos ya cubiertos
-	req.checkBody('username', 'El email no puede estar vacio').notEmpty();
-    req.checkBody('password', 'La contraseña no puede estar vacia').notEmpty();
-    req.checkBody('password2', 'Por favor repite la contraseña').notEmpty();
-    //Falta comprobar que sean iguales. Nota Aitor: La segunda contraseña no se manda al server, se comprueba en el navegador con jQuery o algo asi
-    req.checkBody('firstname', 'El Nombre no puede estar vacio').notEmpty();
-    req.checkBody('lastname', 'Los apellidos no pueden estar vacios').notEmpty();
+exports.modifyGet = function(req, res) {
+	var baseweb = swig.compileFile('views/base.html');
+	var baseurl = 'http://' + req.headers.host + '/';
+	var formrender;
 
-    var errors = req.validationErrors();
-    console.log(errors);
+	if (req.session.refer && req.session.refer.id && req.session.refer.id == 'user-registry') {
+		if (req.session.refer.error) {
+			var error = req.session.refer.error;
+			var formreg = swig.compileFile('views/form-registry.html');
+			formrender = formreg({formerror: error, baseurl: baseurl, user: req.session.user});
+		}
+		else if (req.session.refer.postok) {
+			var formreg = swig.compileFile('views/form-registry-success.html');
+			formrender = formreg({baseurl: baseurl, user: req.session.user});
+		}
+	}
+	else {
+		var formreg = swig.compileFile('views/form-user-info.html');
+		formrender = formreg({baseurl: baseurl, user: req.session.user});
+	}
 
-    if (errors) {
-            res.send("Errores en formulario");
-    }
-    else {
-	//modificar la bd
-            res.send("Usuario creado correctamente");
-    }
+	req.session.refer = new Array();
+	res.status(200);
+	res.send(baseweb({jscripts: [baseurl + 'static/js/forms-parse.js'], content: [formrender], baseurl: baseurl, user: req.session.user}));
+	res.end();
+}
+
+// TODO: Modifica los datos de un usuario
+exports.modifyPost = function(req, res) {
+
+	if (req.param('form-name') == 'user-modify-lang') {
+		req.checkBody('language', i18n.__('Incorrect language.')).isIn(req.getCatalog());
+
+		var errors = req.validationErrors();
+
+		if (errors) {
+			redirectFromPost(req, res, 'user-modify-lang', 'user/modify', errors.shift());
+		}
+		else {
+			req.session.user.lang = req.param('language');
+			res.setLocale(req.session.user.lang);
+			redirectFromPost(req, res, 'user-modify-lang', 'user/modify');
+		}
+	}
+	else {
+		redirectFromPost(req, res, 'user-modify-lang', 'user/modify');
+	}
 }
 
 // TODO: Borra un usuario (el actual)

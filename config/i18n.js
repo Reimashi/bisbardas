@@ -9,6 +9,8 @@ module.exports = function(app) {
         directory: __dirname + '/languages'
     });
 
+    app.use(inter.init);
+
     swig.setExtension('trans', function (v) {
         return inter.__(v); }
     );

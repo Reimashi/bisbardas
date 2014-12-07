@@ -1,0 +1,98 @@
+{% if not baseurl %}
+  {% set baseurl = '' %}
+{% endif %}
+
+<div class="post-container">
+    <div class="title">
+        {% trans %}User panel{% endtrans %}
+    </div>
+    <div class="form-line">
+      <span class="form-line-space"><hl></hl></span>
+    </div>
+    <div class="form">
+        <form name="user-modify-lang" action="{{ baseurl }}user/modify" method="POST">
+            <input type="hidden" name="form-name" value="user-modify-lang" />
+            <div class="form-line">
+                <span class="form-line-title">{% trans %}Language{% endtrans %}</span>
+                <span class="form-line-input">
+                    <select name="language" onchange="this.form.submit()">
+                        <option value="es">{% trans %}Spanish{% endtrans %}</option>
+                        <option value="en">{% trans %}English{% endtrans %}</option>
+                        <option value="gl">{% trans %}Galician{% endtrans %}</option>
+                    </select>
+                </span>
+            </div>
+        </form>
+    </div>
+    <div class="form-line">
+      <span class="form-line-space"><hl></hl></span>
+    </div>
+    <div class="form">
+        <form name="user-modify-info" action="{{ baseurl }}user/modify" method="POST">
+            <input type="hidden" name="form-name" value="user-modify-info" />
+            <div class="form-line">
+                <span class="form-line-title">{% trans %}Email address{% endtrans %}</span>
+                <span class="form-line-input"><input type="text" name="username"/></span>
+            </div>
+            <div class="form-line">
+                <span class="form-line-title">{% trans %}Firstname{% endtrans %}</span>
+                <span class="form-line-input"><input type="text" name="firstname"/></span>
+            </div>
+            <div class="form-line">
+                <span class="form-line-title">{% trans %}Lastname{% endtrans %}</span>
+                <span class="form-line-input"><input type="text" name="lastname"/></span>
+            </div>
+            <div class="form-line">
+              <span class="form-line-space"><hl></hl></span>
+            </div>
+            {% if formerror %}
+            <div class="form-line-error">
+                {{ formerror.msg }}
+            {% else %}
+            <div class="form-line-error" style="display: none;">
+            {% endif %}
+            </div>
+            <div class="form-line">
+                <span class="form-line-title">&nbsp;</span>
+                <span class="form-line-title"><input type="submit" value="{% trans %}Change info{% endtrans %}"/></span>
+            </div>
+        </form>
+    </div>
+    <div class="form-line">
+      <span class="form-line-space"><hl></hl></span>
+    </div>
+    <div class="form">
+        <form name="user-modify-password" action="{{ baseurl }}user/modify" method="POST">
+            <input type="hidden" name="form-name" value="user-modify-password" />
+            <div class="form-line">
+                <span class="form-line-title">{% trans %}Actual password{% endtrans %}</span>
+                <span class="form-line-input"><input type="password" name="old-password"/></span>
+            </div>
+            <div class="form-line">
+                <span class="form-line-title">{% trans %}Password{% endtrans %}</span>
+                <span class="form-line-input"><input type="password" name="password"/></span>
+            </div>
+            <div class="form-line">
+                <span class="form-line-title">{% trans %}Repeat password{% endtrans %}</span>
+                <span class="form-line-input"><input type="password" name="password2"/></span>
+            </div>
+            <div class="form-line">
+              <span class="form-line-space"><hl></hl></span>
+            </div>
+            {% if formerror %}
+            <div class="form-line-error">
+                {{ formerror.msg }}
+            {% else %}
+            <div class="form-line-error" style="display: none;">
+            {% endif %}
+            </div>
+            <div class="form-line">
+                <span class="form-line-title">&nbsp;</span>
+                <span class="form-line-title"><input type="submit" value="{% trans %}Change password{% endtrans %}"/></span>
+            </div>
+        </form>
+    </div>
+    <div class="form-line">
+      <span class="form-line-space"><hl></hl></span>
+    </div>
+</div>
