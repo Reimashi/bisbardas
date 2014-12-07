@@ -1,7 +1,7 @@
 var swig 		     	= require('swig');
 var mongoose 		  = require ('mongoose');
 var friendModel 	= require('../models/friend-model')();
-var userModel     =require('../models/user-model')();
+var userModel     = require('../models/user-model')();
 
 var sampleUser = new userModel({
   email:      'adri@gmail.com',
@@ -16,14 +16,38 @@ exports.index = function(req, res) {
 
   var listRes;
   friendModel.list(sampleUser,function (err, friends) {
+    console.log("amigos: " + friends);
     listRes = Array();
     friends.forEach(function(friend) {
       listRes.push(pieceFriend(friend));
     });
   });
 
+  console.log("listado: " + listRes);
+
   res.status(200);
   res.send(baseweb({'content' : listRes}));
+  res.end();
+};
+
+exports.users = function(req, res) {
+  var baseweb = swig.compileFile('views/base.html');
+  var pieceFriend = swig.compileFile('views/piece-friend.html');
+
+  var x = mongoose.model('User');
+  var usuariosRenders = Array();
+  userModel.find({}, function(err, usuarios) {
+      if (!err){
+        usuarios.forEach(function(usuario) {
+          usuariosRenders.push(pieceFriend(usuario));
+        });
+      }
+      else { throw err;}
+      }
+    );
+  res.status(200);
+  res.send(baseweb({'content' : usuariosRenders}));
+  console.log(usuariosRenders);
   res.end();
 };
 
