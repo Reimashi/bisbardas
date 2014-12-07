@@ -12,7 +12,7 @@ module.exports = function (router) {
 
     router.route('/auth/login')
     .get(authController.index)
-    .post(authController.login);
+    .post(authController.login, passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
 
     router.route('/auth/logout')
     .get(authController.logout, passport.authenticate('local', { failureRedirect: '/' }));
@@ -21,8 +21,8 @@ module.exports = function (router) {
     .get(userController.index, passport.authenticate('local', { failureRedirect: '/auth/login' }));
 
     router.route('/user/add')
-    .get(userController.addForm)
-    .post(userController.add);
+    .get(userController.addGet)
+    .post(userController.addPost);
 
     router.route('/user/modify')
     .get(userController.modify, passport.authenticate('local', { failureRedirect: '/auth/login' }));
