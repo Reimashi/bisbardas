@@ -354,13 +354,13 @@ float: left;
 }
 
 .bb-friend .friend-body .name {
-	margin: 10px 0px;
+	margin: 20px 0px;
 	font-weight: bold;
 	font-size: 1.15em;
 }
 
-.bb-friend .friend-body .data {
-	margin: 5px 0px;
+.bb-friend .friend-body .social {
+	margin: 10px 0px;
 	text-align: justify;
 	line-height: 20px;
 }

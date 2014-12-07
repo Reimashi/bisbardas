@@ -39,16 +39,16 @@ exports.users = function(req, res) {
   userModel.find({}, function(err, usuarios) {
       if (!err){
         usuarios.forEach(function(usuario) {
+          console.log(usuario);
           usuariosRenders.push(pieceFriend(usuario));
         });
+        res.status(200);
+        res.send(baseweb({'content' : usuariosRenders}));
+        res.end();
       }
       else { throw err;}
       }
     );
-  res.status(200);
-  res.send(baseweb({'content' : usuariosRenders}));
-  console.log(usuariosRenders);
-  res.end();
 };
 
 // TODO: Añade una peticion de amistad

@@ -4,18 +4,18 @@
   </div>
   <div class="friend-body">
     <div class="name">
-      Nombre del amigo
-    </div>
-    <div class="data">
-      <div class="ctext">
-        <p>Edad, dirección</p>
-      </div>
+      {{ email }}
     </div>
     <div class="social">
-      {% if friends %}
-      <span class="friend-button"><button>{% trans %}Remove friend{% endtrans %}</button></span>
+      {% if blocked %}
+      <span class="friend-button"><button>{% trans %}Unblock user{% endtrans %}</button></span>
       {% else %}
-      <span class="friend-button"><button>{% trans %}Add friend{% endtrans %}</button></span>
+      <span class="friend-button"><button>{% trans %}Block friend{% endtrans %}</button></span>
+      {% endif %}
+      {% if friends %}
+      <span class="friend-button"><button>{% trans %}Accept user{% endtrans %}</button></span>
+      {% else %}
+      <span class="friend-button"><button>{% trans %}Remove friend{% endtrans %}</button></span>
       {% endif %}
     </div>
   </div>
