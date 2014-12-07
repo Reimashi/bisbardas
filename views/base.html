@@ -22,13 +22,13 @@
         <div id="head-title">
           <a href="{{ baseurl }}" title="{% trans %}Home{% endtrans %}"><img src="{{ baseurl }}static/img/title.png" /></a>
         </div>
-        {% if loguedin %}
+        {% if user %}
         <div id="head-profile">
           <div id="profile-logout">
             <button>{% trans %}Logout{% endtrans %}</button>
           </div>
           <div id="profile-photo">
-            <a href="#"><img src="{{ userinfo.photo }}"/></a>
+            <a href="{{ baseurl }}user/modify"><img src="{% if user.photo %}{{ baseurl }}{{ user.photo }}{% else %}{{ baseurl }}static/img/default-user.png{% endif %}"/></a>
           </div>
         </div>
         {% else %}
@@ -47,16 +47,16 @@
       <div id="container-menu">
         <div id="head-menu">
           <ul>
-            {% if loguedin %}
-            <li><a href="#" title="{% trans %}Home{% endtrans %}"><img src="{{ baseurl }}static/img/home.png"/></a></li>
-            <li><a href="#" title="{% trans %}Messages{% endtrans %}"><img src="{{ baseurl }}static/img/mail_ru.png"/></a></li>
-            <li><a href="#" title="{% trans %}Friends{% endtrans %}"><img src="{{ baseurl }}static/img/people.png"/></a></li>
+            {% if user %}
+            <li><a href="{{ baseurl }}wall" title="{% trans %}Home{% endtrans %}"><img src="{{ baseurl }}static/img/home.png"/></a></li>
+            <li><a href="{{ baseurl }}friends" title="{% trans %}Messages{% endtrans %}"><img src="{{ baseurl }}static/img/mail_ru.png"/></a></li>
+            <li><a href="{{ baseurl }}friends/search" title="{% trans %}Friends{% endtrans %}"><img src="{{ baseurl }}static/img/people.png"/></a></li>
             {% endif %}
           </ul>
         </div>
         <div id="head-userinfo">
-          {% if loguedin %}
-          <span>{% trans %}Hello{% endtrans %}, {{ userinfo.name }}</span>
+          {% if user %}
+          <span>{% trans %}Hello{% endtrans %}, {{ user.name.first }}</span>
           {% endif %}
         </div>
       </div>

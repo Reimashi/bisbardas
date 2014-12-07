@@ -1,5 +1,8 @@
 function checkLogin(req, res, next) {
     if (req.session.user) {
+        if (req.session.user.lang) {
+            res.setLocale(req.session.user.lang);
+        }
         next();
     } else {
         res.redirect('/auth/login');
@@ -32,10 +35,12 @@ module.exports = function (router) {
     .post(userController.addPost);
 
     router.route('/user/modify')
-    .get(checkLogin, userController.modify);
+    .get(checkLogin, userController.modifyGet)
+    .post(checkLogin, userController.modifyPost);
 
     router.route('/user/delete')
-    .get(checkLogin, userController.delete);
+    .post(checkLogin, userController.delete)
+    .post(checkLogin, userController.delete);
 
     router.route('/users')
     .get(checkLogin, friendController.users)

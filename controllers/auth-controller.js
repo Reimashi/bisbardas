@@ -47,7 +47,7 @@ exports.loginGet = function(req, res) {
 
     req.session.refer = new Array();
     res.status(200);
-    res.send(baseweb({content: [formrender], baseurl: baseurl}));
+    res.send(baseweb({content: [formrender], baseurl: baseurl, user: req.session.user}));
     res.end();
 }
 
