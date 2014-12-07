@@ -1,6 +1,7 @@
 var express         = require('express');
 var session 		= require('express-session');
 var path            = require('path');
+var busboy 			= require('connect-busboy');
 
 var app             = express();
 var config          = require('./config/server');
@@ -8,6 +9,9 @@ var db              = require('./database');
 
 // Añadimos soporte a sesiones.
 app.use(session({secret: config.sessionkey}));
+
+// Configuramos el handler de archivos.
+app.use(busboy());
 
 // Establecemos la configuración de la plantillas Swig.
 require('./config/swig')(app);

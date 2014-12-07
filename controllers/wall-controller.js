@@ -9,17 +9,20 @@ var postModel 		= require('../models/post-model')();
 exports.index = function(req, res) {
 	var baseweb = swig.compileFile('views/base.html');
 	var baseurl = 'http://' + req.headers.host + '/';
-	var buttonnew = swig.compileFile('views/button-newpost.html');
+
+	var newform = swig.compileFile('views/form-newpost.html');
 	var piecepost = swig.compileFile('views/piece-post.html');
 
-	postModel.list(20, 0, function (err, posts) {
-		var postsRenders = Array();
-		postsRenders.push(buttonnew());
+	var postsRenders = Array();
+	postsRenders.push(newform());
+
+	postModel.list(req.session.user, 20, 0, function (err, posts) {
 		posts.forEach(function(post) {
-			postsRenders.push(piecepost(post));
+			postsRenders.push(piecepost({info: post}));
 		});
+
 		res.status(200);
-		res.send(baseweb({content: postsRenders, user: req.session.user}));
+		res.send(baseweb({baseurl: baseurl, content: postsRenders, user: req.session.user}));
 		res.end();
 	});
 }
@@ -28,7 +31,11 @@ exports.index = function(req, res) {
 exports.addPost = function(req, res) {
 	var baseurl = 'http://' + req.headers.host + '/';
 
-	var npost = new postModel(req.body);
+	var npost = new postModel({
+		title: req.param('post-title'),
+		body: req.param('post-body'),
+		author: req.session.user._id
+	});
 
 	npost.save(function (err) {
 		if (err) console.log('Error insertando post.');

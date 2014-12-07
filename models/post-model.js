@@ -4,7 +4,8 @@ var Schema      = mongoose.Schema;
 var postSchema = new Schema ({
   title:      { type: String, required: true },
   body:       { type: String, required: true },
-  author:     { type: Schema.Types.ObjectId, ref: 'User' },
+  author:     { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  img:        { type: String },
   createdAt:  { type : Date, default : Date.now },
   likes:      [{
       user:   { type: Schema.Types.ObjectId, ref: 'User' }
@@ -48,12 +49,26 @@ postSchema.methods = {
 }
 
 postSchema.statics = {
-    list: function (limit, step, cb) {
-        this.find({})
-            .limit(limit)
-            .sort({'createdAt': -1})
-            .skip(limit * step)
-            .exec(cb);
+    list: function (user, limit, step, cb) {
+        friendModel = mongoose.model('Friend');
+        postModel = this;
+
+        friendModel.find({ user: user._id, acepted: true }).exec(function (err, friends) {
+            var friendids = [];
+            friendids.push(user._id);
+
+            friends.forEach(function(friend) {
+                friendids.push(friend.friend);
+            });
+
+            postModel.find({})
+                .where('author')
+                .in(friendids)
+                .limit(limit)
+                .sort({'createdAt': -1})
+                .skip(limit * step)
+                .exec(cb);
+        });
     }
 }
 

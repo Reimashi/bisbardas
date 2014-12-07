@@ -9,6 +9,8 @@
   "license": "AGPL-3.0",
   "dependencies": {
     "body-parser": "^1.9.2",
+    "busboy": "^0.2.9",
+    "connect-busboy": "0.0.2",
     "express": ">4.7.0",
     "express-session": "^1.9.3",
     "express-validator": "^2.7.0",

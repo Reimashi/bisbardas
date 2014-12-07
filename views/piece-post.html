@@ -1,17 +1,14 @@
 <div class="bb-post">
   <div class="post-image">
-    <img src="{{ image }}">
+    <img src="{% if info.image %}{{ baseurl }}static/img-upload/{{ info.image }}{% else %}{{ baseurl }}static/img/default-post.png{% endif %}">
   </div>
   <div class="post-body">
     <div class="title">
-      {{ title }}
+      {{ info.title }}
     </div>
     <div class="content">
       <div class="ctext">
-        <p>{{ body }}</p>
-      </div>
-      <div class="mtext">
-        <span class="more-tag"><a href="/post/show{{id}}">...{% trans %}read the full post{% endtrans %}</a></span>
+        <p>{{ info.body }}</p>
       </div>
     </div>
     <div class="social">

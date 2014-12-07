@@ -42,12 +42,12 @@ module.exports = function (router) {
     .post(checkLogin, userController.delete)
     .post(checkLogin, userController.delete);
 
+    router.route('/users')
+    .get(checkLogin, friendController.users)
+
     router.route('/friends')
     .get(checkLogin, friendController.index)
     .post(checkLogin, friendController.add);
-
-    router.route('/users')
-    .get(checkLogin, friendController.users);
 
     router.route('/friends/accept/:id')
     .get(checkLogin, friendController.accept);
@@ -62,7 +62,6 @@ module.exports = function (router) {
     .get(checkLogin, wallController.index);
 
     router.route('/post/add')
-    .get(checkLogin, wallController.addPostForm)
     .post(checkLogin, wallController.addPost);
 
     router.route('/post/show/:id')
