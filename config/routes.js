@@ -37,6 +37,9 @@ module.exports = function (router) {
     router.route('/user/delete')
     .get(checkLogin, userController.delete);
 
+    router.route('/users')
+    .get(checkLogin, friendController.users)
+
     router.route('/friends')
     .get(checkLogin, friendController.index)
     .post(checkLogin, friendController.add);
