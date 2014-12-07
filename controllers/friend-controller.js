@@ -3,34 +3,72 @@ var mongoose 		  = require ('mongoose');
 var friendModel 	= require('../models/friend-model')();
 var userModel     =require('../models/user-model')();
 
+var sampleUser = new userModel({
+  email:      'adri@gmail.com',
+  name:       'adri',
+  password:   'adri',
+});
+
+var sampleUser2 = new userModel({
+  email:      'rita@gmail.com',
+  name:       'rita',
+  password:   'rita',
+});
+
 // TODO: Genera la pagina del muro (Si usuario logueado)
 exports.index = function(req, res) {
   var baseweb = swig.compileFile('views/base.html');
-  var piecefriend = swig.compileFile('views/piece-friend.html');
+  var pieceFriend = swig.compileFile('views/piece-friend.html');
 
-  var viewparams = {
-    'content': [piecefriend()]
-  };
-  console.log("Prueba");
-  console.log(req);
-  //console.log(friendModel.list(userModel,1));
+  var listRes;
+  friendModel.list(sampleUser,function (err, friends) {
+    listRes = Array();
+    friends.forEach(function(friend) {
+      listRes.push(pieceFriend(friend));
+    });
+  });
+
   res.status(200);
-  res.send(baseweb(viewparams));
+  res.send(baseweb({'content' : listRes}));
   res.end();
 };
 
 // TODO: Añade una peticion de amistad
 exports.add = function(req, res) {
+  var amigo = new friendModel ({
+    user:       sampleUser2,
+    friend:     sampleUser,
+    acepted:    false
+  });
+  amigo.save();
 };
 
 // TODO: Acepta una peticion de amistad
 exports.accept = function(req, res) {
+  friendModel.find({
+    user:       sampleUser2,
+    friend:     sampleUser,
+    acepted:    false
+  }).accept();
 };
 
 // TODO: Borra una peticion de amistad
 exports.delete = function(req, res) {
+  friendModel.remove({
+    user:       sampleUser2,
+    friend:     sampleUser,
+  }, function(err) {
+    if (err) {
+      message.type = 'Error al eliminar amistad';
+    }
+  }
+);
 };
 
 // TODO: Ignora un amigo por su id de usuario
 exports.ignore = function(req, res) {
+  friendModel.find({
+    user:       sampleUser2,
+    friend:     sampleUser,
+  }).ignore();
 };
