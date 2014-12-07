@@ -1,10 +1,14 @@
 var express         = require('express');
+var session 		= require('express-session');
 var passport 		= require('passport');
 var path            = require('path');
 
 var app             = express();
 var config          = require('./config/server');
 var db              = require('./database');
+
+// Añadimos soporte a sesiones.
+app.use(session({secret: config.sessionkey}));
 
 // Establecemos la configuración de passport
 require('./config/passport')(passport);
