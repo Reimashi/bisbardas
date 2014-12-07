@@ -19,7 +19,7 @@ exports.index = function(req, res) {
 			postsRenders.push(piecepost(post));
 		});
 		res.status(200);
-		res.send(baseweb({content: postsRenders}));
+		res.send(baseweb({content: postsRenders, user: req.session.user}));
 		res.end();
 	});
 }

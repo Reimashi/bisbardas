@@ -25,7 +25,7 @@ exports.index = function(req, res) {
 
     console.log("listado: " + listRes);
     res.status(200);
-    res.send(baseweb({'content' : listRes}));
+    res.send(baseweb({'content' : listRes, user: req.session.user}));
     res.end();
   });
 };
@@ -44,7 +44,7 @@ exports.users = function(req, res) {
         }
       });
       res.status(200);
-      res.send(baseweb({'content' : usuariosRenders}));
+      res.send(baseweb({'content' : usuariosRenders, user: req.session.user}));
       res.end();
     }
     else { throw err;}
