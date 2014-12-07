@@ -1,6 +1,6 @@
 <div class="bb-friend">
   <div class="friend-image">
-    <img src="{{ image }}">
+    <img src="{% if info.image %}{{ baseurl }}static/img-upload/{{ info.image }}{% else %}{{ baseurl }}static/img/default-post.png{% endif %}">
   </div>
   <div class="friend-body">
     <div class="name">
