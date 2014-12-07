@@ -1,13 +1,17 @@
+{% if not baseurl %}
+  {% set baseurl = '' %}
+{% endif %}
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>Bisbardas{% if title %} - {{ title }}{% endif %}</title>
-    <link href="static/css/common.css" rel=stylesheet type="text/css" />
+    <link href="{{ baseurl }}static/css/common.css" rel=stylesheet type="text/css" />
     {% for script in csscripts %}
     <link href="{{ script }}" rel=stylesheet type="text/css" />
     {% endfor %}
-    <script type="text/javascript" src="static/js/jquery-2.min.js"></script>
+    <script type="text/javascript" src="{{ baseurl }}static/js/jquery-2.min.js"></script>
     {% for script in jscripts %}
     <script type="text/javascript" src="{{ script }}"></script>
     {% endfor %}
@@ -16,7 +20,7 @@
     <div id="bb-head-container">
       <div id="container-title">&nbsp;
         <div id="head-title">
-          <img src="static/img/title.png" />
+          <img src="{{ baseurl }}static/img/title.png" />
         </div>
         {% if loguedin %}
         <div id="head-profile">
@@ -31,8 +35,8 @@
         <div id="head-login">
           <form name="form-login" action="/login" method="POST">
             <div class="form-login">
-              <div class="form-login-elem form-login-input" title="{% trans %}User{% endtrans %}"><img src="static/img/people.png" /><input type="text" name="username" /></div>
-              <div class="form-login-elem form-login-input" title="{% trans %}Password{% endtrans %}"><img src="static/img/authenticator.png" /><input type="password" name="password" /></div>
+              <div class="form-login-elem form-login-input" title="{% trans %}User{% endtrans %}"><img src="{{ baseurl }}static/img/people.png" /><input type="text" name="username" /></div>
+              <div class="form-login-elem form-login-input" title="{% trans %}Password{% endtrans %}"><img src="{{ baseurl }}static/img/authenticator.png" /><input type="password" name="password" /></div>
               <div class="form-login-elem form-login-button"><input type="submit" value="{% trans %}Login{% endtrans %}"></div>
             </div>
           </form>
@@ -43,9 +47,9 @@
         <div id="head-menu">
           <ul>
             {% if loguedin %}
-            <li><a href="#" title="{% trans %}Home{% endtrans %}"><img src="static/img/home.png"/></a></li>
-            <li><a href="#" title="{% trans %}Messages{% endtrans %}"><img src="static/img/mail_ru.png"/></a></li>
-            <li><a href="#" title="{% trans %}Friends{% endtrans %}"><img src="static/img/people.png"/></a></li>
+            <li><a href="#" title="{% trans %}Home{% endtrans %}"><img src="{{ baseurl }}static/img/home.png"/></a></li>
+            <li><a href="#" title="{% trans %}Messages{% endtrans %}"><img src="{{ baseurl }}static/img/mail_ru.png"/></a></li>
+            <li><a href="#" title="{% trans %}Friends{% endtrans %}"><img src="{{ baseurl }}static/img/people.png"/></a></li>
             {% endif %}
           </ul>
         </div>
