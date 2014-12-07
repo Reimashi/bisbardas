@@ -93,4 +93,5 @@ exports.loginPost = function(req, res) {
 exports.logoutPost = function(req, res) {
     var baseurl = 'http://' + req.headers.host + '/';
     req.session.user = false;
+    res.redirect(baseurl);
 }

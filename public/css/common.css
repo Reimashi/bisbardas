@@ -45,13 +45,14 @@ body {
   background: #f6f6f6;
 }
 
-input[type="submit"], button {
+input[type="submit"], button, a.button {
   background: #199e8c;
   margin: 0px;
   padding: 6px 8px;
   border: 0px;
   border-radius: 4px;
   color: #fff;
+	text-decoration: none;
 }
 
 /* ********* Estilo de bisbardas - Cabecera **************** */
@@ -240,7 +241,7 @@ float: left;
 	text-align: center;
 }
 
-.form-line-input input {
+.form-line-input input, .form-line-input textarea {
   display: inline-block;
   width: 180px;
   height: 20px;
