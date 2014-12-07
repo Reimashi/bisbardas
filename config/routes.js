@@ -1,4 +1,10 @@
-var passport = require('passport');
+function checkLogin(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.redirect('/auth/login');
+    }
+}
 
 module.exports = function (router) {
     var homeController = require('../controllers/home-controller');
@@ -11,48 +17,49 @@ module.exports = function (router) {
     .get(homeController.index);
 
     router.route('/auth/login')
-    .get(authController.index)
-    .post(authController.login, passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
+    .get(authController.loginGet)
+    .post(authController.loginPost);
 
     router.route('/auth/logout')
-    .get(authController.logout, passport.authenticate('local', { failureRedirect: '/' }));
+    .get(authController.logoutPost)
+    .post(authController.logoutPost);
 
     router.route('/user/show/:id')
-    .get(userController.index, passport.authenticate('local', { failureRedirect: '/auth/login' }));
+    .get(checkLogin, userController.index);
 
     router.route('/user/add')
     .get(userController.addGet)
     .post(userController.addPost);
 
     router.route('/user/modify')
-    .get(userController.modify, passport.authenticate('local', { failureRedirect: '/auth/login' }));
+    .get(checkLogin, userController.modify);
 
     router.route('/user/delete')
-    .get(userController.delete, passport.authenticate('local', { failureRedirect: '/auth/login' }));
+    .get(checkLogin, userController.delete);
 
     router.route('/friends')
-    .get(friendController.index, passport.authenticate('local', { failureRedirect: '/auth/login' }))
-    .post(friendController.add, passport.authenticate('local', { failureRedirect: '/auth/login' }));
+    .get(checkLogin, friendController.index)
+    .post(checkLogin, friendController.add);
 
     router.route('/friends/accept/:id')
-    .get(friendController.accept, passport.authenticate('local', { failureRedirect: '/auth/login' }));
+    .get(checkLogin, friendController.accept);
 
     router.route('/friends/ignore/:id')
-    .get(friendController.ignore, passport.authenticate('local', { failureRedirect: '/auth/login' }));
+    .get(checkLogin, friendController.ignore);
 
     router.route('/friends/delete/:id')
-    .get(friendController.delete, passport.authenticate('local', { failureRedirect: '/auth/login' }));
+    .get(checkLogin, friendController.delete);
 
     router.route('/wall')
-    .get(wallController.index, passport.authenticate('local', { failureRedirect: '/auth/login' }));
+    .get(checkLogin, wallController.index);
 
     router.route('/post/add')
-    .get(wallController.addPostForm, passport.authenticate('local', { failureRedirect: '/auth/login' }))
-    .post(wallController.addPost, passport.authenticate('local', { failureRedirect: '/auth/login' }));
+    .get(checkLogin, wallController.addPostForm)
+    .post(checkLogin, wallController.addPost);
 
     router.route('/post/show/:id')
-    .get(wallController.getPost, passport.authenticate('local', { failureRedirect: '/auth/login' }));
+    .get(checkLogin, wallController.getPost);
 
-    router.route('/post/delete/:id', passport.authenticate('local', { failureRedirect: '/auth/login' }))
-    .get(wallController.deletePost);
+    router.route('/post/delete/:id')
+    .get(checkLogin, wallController.deletePost);
 }

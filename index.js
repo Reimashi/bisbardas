@@ -1,6 +1,5 @@
 var express         = require('express');
 var session 		= require('express-session');
-var passport 		= require('passport');
 var path            = require('path');
 
 var app             = express();
@@ -9,9 +8,6 @@ var db              = require('./database');
 
 // Añadimos soporte a sesiones.
 app.use(session({secret: config.sessionkey}));
-
-// Establecemos la configuración de passport
-require('./config/passport')(passport);
 
 // Establecemos la configuración de la plantillas Swig.
 require('./config/swig')(app);

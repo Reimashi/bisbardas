@@ -1,27 +1,31 @@
+{% if not baseurl %}
+  {% set baseurl = '' %}
+{% endif %}
+
 <div class="form-login-large">
-    <form name="form-login" action="/auth" method="POST">
+    <form name="auth-login" action="{{ baseurl }}auth/login" method="POST">
+        <input type="hidden" name="form-name" value="auth-login" />
         <div class="form-line">
-            <span class="form-line-title">Dirección de email</span>
+            <span class="form-line-title">{% trans %}Email address{% endtrans %}</span>
             <span class="form-line-input"><input type="text" name="username"/></span>
         </div>
         <div class="form-line">
-            <span class="form-line-title">Contraseña</span>
+            <span class="form-line-title">{% trans %}Password{% endtrans %}</span>
             <span class="form-line-input"><input type="password" name="password"/></span>
         </div>
         <div class="form-line">
             <span class="form-line-space"></span>
         </div>
-        {% if formLoginError %}
-        <div class="form-line">
-            <span class="form-line-error">{{ formLoginError }}</span>
-        </div>
-        <div class="form-line">
-            <span class="form-line-space"></span>
-        </div>
+        {% if formerror %}
+        <div class="form-line-error">
+            {{ formerror.msg }}
+        {% else %}
+        <div class="form-line-error" style="display: none;">
         {% endif %}
+        </div>
         <div class="form-line">
             <span class="form-line-title">&nbsp;</span>
-            <span class="form-line-title"><input type="submit" value="Entrar"/></span>
+            <span class="form-line-title"><input type="submit" value="{% trans %}Login{% endtrans %}"/></span>
         </div>
     </form>
 </div>

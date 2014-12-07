@@ -20,7 +20,7 @@
     <div id="bb-head-container">
       <div id="container-title">&nbsp;
         <div id="head-title">
-          <img src="{{ baseurl }}static/img/title.png" />
+          <a href="{{ baseurl }}" title="{% trans %}Home{% endtrans %}"><img src="{{ baseurl }}static/img/title.png" /></a>
         </div>
         {% if loguedin %}
         <div id="head-profile">
@@ -33,7 +33,8 @@
         </div>
         {% else %}
         <div id="head-login">
-          <form name="form-login" action="/login" method="POST">
+          <form name="form-login" action="{{ baseurl }}auth/login" method="POST">
+              <input type="hidden" name="form-name" value="auth-login" />
             <div class="form-login">
               <div class="form-login-elem form-login-input" title="{% trans %}User{% endtrans %}"><img src="{{ baseurl }}static/img/people.png" /><input type="text" name="username" /></div>
               <div class="form-login-elem form-login-input" title="{% trans %}Password{% endtrans %}"><img src="{{ baseurl }}static/img/authenticator.png" /><input type="password" name="password" /></div>
