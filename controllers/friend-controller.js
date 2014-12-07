@@ -9,12 +9,6 @@ var sampleUser = new userModel({
   password:   'adri',
 });
 
-var sampleUser2 = new userModel({
-  email:      'rita@gmail.com',
-  name:       'rita',
-  password:   'rita',
-});
-
 // TODO: Genera la pagina del muro (Si usuario logueado)
 exports.index = function(req, res) {
   var baseweb = swig.compileFile('views/base.html');
@@ -36,7 +30,7 @@ exports.index = function(req, res) {
 // TODO: Añade una peticion de amistad
 exports.add = function(req, res) {
   var amigo = new friendModel ({
-    user:       sampleUser2,
+    user:       req.session.user,
     friend:     sampleUser,
     acepted:    false
   });
@@ -46,7 +40,7 @@ exports.add = function(req, res) {
 // TODO: Acepta una peticion de amistad
 exports.accept = function(req, res) {
   friendModel.find({
-    user:       sampleUser2,
+    user:       req.session.user,
     friend:     sampleUser,
     acepted:    false
   }).accept();
@@ -55,20 +49,19 @@ exports.accept = function(req, res) {
 // TODO: Borra una peticion de amistad
 exports.delete = function(req, res) {
   friendModel.remove({
-    user:       sampleUser2,
+    user:       req.session.user,
     friend:     sampleUser,
   }, function(err) {
     if (err) {
       message.type = 'Error al eliminar amistad';
     }
-  }
-);
+  });
 };
 
 // TODO: Ignora un amigo por su id de usuario
 exports.ignore = function(req, res) {
   friendModel.find({
-    user:       sampleUser2,
+    user:       req.session.user,
     friend:     sampleUser,
   }).ignore();
 };
