@@ -39,6 +39,10 @@ input:focus, select:focus, textarea:focus, button:focus {
   outline: none;
 }
 
+.clear-float {
+	clear: both;
+}
+
 /* ********* Estilo de bisbardas *************************** */
 
 body {
@@ -394,4 +398,8 @@ float: left;
 
 .newpost-form .form-line-input textarea {
 	height: 86px;
+}
+
+a.red-button {
+	background: #d00;
 }

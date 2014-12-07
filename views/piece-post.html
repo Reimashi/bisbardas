@@ -1,3 +1,7 @@
+{% if not baseurl %}
+  {% set baseurl = '' %}
+{% endif %}
+
 <div class="bb-post">
   <div class="post-image">
     <img src="{% if info.image %}{{ baseurl }}static/img-upload/{{ info.image }}{% else %}{{ baseurl }}static/img/default-post.png{% endif %}">
@@ -12,10 +16,11 @@
       </div>
     </div>
     <div class="social">
+        <span class="social-button"><a href="{{ baseurl }}post/delete/{{ info.id }}" class="button red-button">{% trans %}Delete{% endtrans %}</a></span>
       {% if userlike %}
-      <span class="like-button"><button>{% trans %}I don't like this anymore{% endtrans %}</button></span>
+      <span class="social-button"><a href="{{ baseurl }}post/unlike/{{ info.id }}" class="button">{% trans %}I don't like this anymore{% endtrans %}</a></span>
       {% else %}
-      <span class="like-button"><button>{% trans %}Like it{% endtrans %}</button></span>
+      <span class="social-button"><a href="{{ baseurl }}post/like/{{ info.id }}" class="button">{% trans %}Like it{% endtrans %}</a></span>
       {% endif %}
       <span class="social-resume">
         {% if userlike %}
@@ -23,18 +28,18 @@
             A ti te gusta esto.
           {% elseif likes == 1 %}
             A ti y a 1 persona más os gusta esto.
-          {% else %}
+          {% elseif likes > 1 %}
             A ti y a {{ likes }} personas más os gusta esto.
           {% endif %}
         {% else %}
           {% if likes == 1 %}
             A 1 persona le gusta esto.
-          {% else %}
+          {% elseif likes > 1 %}
             A {{ likes }} personas les gusta esto.
           {% endif %}
         {% endif %}
       </span>
     </div>
   </div>
-  <div style="clear: both;"></div>
+  <div class="clear-float"></div>
 </div>

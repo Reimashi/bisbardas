@@ -18,7 +18,7 @@ exports.index = function(req, res) {
 
 	postModel.list(req.session.user, 20, 0, function (err, posts) {
 		posts.forEach(function(post) {
-			postsRenders.push(piecepost({info: post}));
+			postsRenders.push(piecepost({baseurl: baseurl, info: post}));
 		});
 
 		res.status(200);
