@@ -5,7 +5,7 @@
     <div class="title">
         {% trans %}Publish a new post{% endtrans %}
     </div>
-    <div class="form">
+    <div class="form newpost-form">
         <form name="form-post" action="/post/add" method="POST">
             <input type="hidden" name="form-name" value="form-post" />
             <div class="form-line">
@@ -15,10 +15,16 @@
                 <span class="form-line-input"><input type="text" name="post-title"/></span>
             </div>
             <div class="form-line">
+                <span class="form-line-space"></span>
+            </div>
+            <div class="form-line">
                 <span class="form-line-title">{% trans %}Content{% endtrans %}</span>
             </div>
             <div class="form-line">
                 <span class="form-line-input"><textarea name="post-body"></textarea></span>
+            </div>
+            <div class="form-line">
+                <span class="form-line-space"></span>
             </div>
             <div class="form-line">
                 <span class="form-line-title">&nbsp;</span>

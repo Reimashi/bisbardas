@@ -381,3 +381,17 @@ float: left;
 	text-align: justify;
 	line-height: 20px;
 }
+
+.newpost-form .form-line-title {
+	text-align: left;
+}
+
+.newpost-form .form-line-input,
+.newpost-form .form-line-input input,
+.newpost-form .form-line-input textarea {
+	width: 400px;
+}
+
+.newpost-form .form-line-input textarea {
+	height: 86px;
+}
