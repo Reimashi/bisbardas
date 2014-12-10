@@ -44,7 +44,7 @@ exports.addGet = function(req, res) {
 		if (req.session.refer.error) {
 			var error = req.session.refer.error;
 			var formreg = swig.compileFile('views/form-registry.html');
-			formrender = formreg({formerror: error, baseurl: baseur, user: req.session.userl});
+			formrender = formreg({formerror: error, baseurl: baseurl, user: req.session.userl});
 		}
 		else if (req.session.refer.postok) {
 			var formreg = swig.compileFile('views/form-registry-success.html');
