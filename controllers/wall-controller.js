@@ -82,21 +82,50 @@ exports.getPost = function(req, res) {
 	);
 }
 
-// TODO: Por probar, echadle un ojo si podeis
+// Elimina una entrada en modo asincrono
 exports.deletePost = function(req, res) {
-	postModel
-	.findByIdAndRemove(req.body.id,
-		function (err) {
-			if (err) console.log('Error eliminando post.')
-				else console.log('Post eliminado.');
-			});
-
-		}
-
-// TODO: Pone like a un post desde el usuario actual
-exports.addLike = function(req, res) {
+	postModel.findOne({ _id: req.param('id') }, function (err, post) {
+			if (err) res.status(404).end();
+			else {
+				if (post.author == req.session.user.id) {
+					postModel.findOne({ _id: req.param('id') }).remove(function(err) {
+						if (err) res.status(500).end();
+						res.status(200).end;
+					});
+				}
+				else {
+					res.status(401).end();
+				}
+			}
+	});
 }
 
-// TODO: Borra el like del usuario de un post
+// Añade un like en modo asincrono
+exports.addLike = function(req, res) {
+	postModel.findOne({_id: req.param('id')}, function (err, post) {
+		if (err) res.status(404).end();
+		else {
+			post.deleteLike(req.session.user, function (err) {
+				if (err) res.status(401).end();
+				else {
+					res.status(200).end();
+				}
+			}
+		}
+	});
+}
+
+// Borra un like en modo asíncrono.
 exports.deleteLike = function(req, res) {
+	postModel.findOne({_id: req.param('id')}, function (err, post) {
+		if (err) res.status(404).end();
+		else {
+			post.deleteLike(req.session.user, function (err) {
+				if (err) res.status(401).end();
+				else {
+					res.status(200).end();
+				}
+			}
+		}
+	});
 }
