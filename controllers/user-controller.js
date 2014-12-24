@@ -2,7 +2,6 @@ var url 			= require('url');
 var swig 		    = require('swig');
 var i18n 		    = require('i18n');
 var mongoose 		= require('mongoose');
-var crypto 			= require('crypto');
 var validator 		= require('express-validator');
 var userModel 		= require('../models/user-model')();
 
@@ -58,7 +57,7 @@ exports.addGet = function(req, res) {
 
 	req.session.refer = new Array();
 	res.status(200);
-	res.send(baseweb({content: [formrender], baseurl: baseurl, user: req.session.user}));
+	res.send(baseweb({content: [formrender], baseurl: baseurl, user: req.session.user, jscripts: ['sha1.js', 'bisbardas-forms.js']}));
 	res.end();
 }
 
@@ -68,34 +67,28 @@ exports.addPost = function(req, res) {
 	if (req.param('form-name') == 'user-registry') {
 		req.checkBody('username', i18n.__('El email no puede estar vacio.')).notEmpty();
 		req.checkBody('username', i18n.__('El email no es correcto.')).isEmail();
-		req.checkBody('password', i18n.__('La contraseña no puede estar vacia.')).notEmpty();
-		req.checkBody('password', i18n.__('La contraseña debe estar compuesta por caracteres alfanuméricos.')).isAlphanumeric();
-		req.checkBody('password', i18n.__('La contraseña debe tener un tamaño de entre 6 y 24 caracteres.')).len(6, 24);
-		req.checkBody('password-repeat', i18n.__('Las contraseñas deben coincidir.')).equals(req.param('password'));
-	    req.checkBody('firstname', i18n.__('El Nombre no puede estar vacio')).notEmpty();
-	    req.checkBody('lastname', i18n.__('Los apellidos no pueden estar vacios')).notEmpty();
+		req.checkBody('password-encrypted', i18n.__('La contraseña recibida no está codificada en SHA-1.')).len(40);
+    req.checkBody('firstname', i18n.__('El Nombre no puede estar vacio')).notEmpty();
+    req.checkBody('lastname', i18n.__('Los apellidos no pueden estar vacios')).notEmpty();
 
 		req.sanitize('username').normalizeEmail().toString();
-		req.sanitize('password').toString();
+		req.sanitize('password-encrypted').toString();
 		req.sanitize('firstname').toString();
 		req.sanitize('lastname').toString();
 
 		var errors = req.validationErrors();
 
-	  	if (errors) {
+  	if (errors) {
 			redirectFromPost(req, res, 'user-registry', 'user/add', errors.shift());
 		}
 		else {
-			var encpassword = crypto.createHash('sha1');
-			encpassword.update(req.param('password'));
-
 			var newUser = new userModel({
 				email: req.param('username'),
 				name: {
 					first: req.param('firstname'),
 					last: req.param('lastname')
 				},
-				password: encpassword.digest('hex')
+				password: req.param('password-encrypted')
 			});
 
 			newUser.save(function(err){

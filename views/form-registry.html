@@ -12,6 +12,7 @@
   <div class="form">
     <form name="user-registry" action="{{ baseurl }}user/add" method="POST">
         <input type="hidden" name="form-name" value="user-registry" />
+        <input type="hidden" name="password-encrypted">
         <div class="form-line">
             <span class="form-line-title">{% trans %}Email address{% endtrans %}</span>
             <span class="form-line-input"><input type="text" name="username"/></span>
@@ -44,13 +45,28 @@
         {% else %}
         <div class="form-line-error" style="display: none;">
         {% endif %}
-        </div>
-        <div class="form-line">
+          <div id="error-username" class="error-msg" style="display: none;">
+            {% trans %}The email address isn't valid.{% endtrans %}
+          </div>
+          <div id="error-password" class="error-msg" style="display: none;">
+            {% trans %}The password should have between 6 and 24 characters.{% endtrans %}
+          </div>
+          <div id="error-password-repeat" class="error-msg" style="display: none;">
+            {% trans %}The passwords don't match.{% endtrans %}
+          </div>
+          <div id="error-firstname" class="error-msg" style="display: none;">
+            {% trans %}You should specify a firstname.{% endtrans %}
+          </div>
+          <div id="error-lastname" class="error-msg" style="display: none;">
+            {% trans %}You should specify a lastname.{% endtrans %}
+          </div>
+          <div class="form-line">
             <span class="form-line-space"></span>
+          </div>
         </div>
         <div class="form-line">
             <span class="form-line-title">&nbsp;</span>
-            <span class="form-line-title"><input type="submit" value="{% trans %}Sing in{% endtrans %}"/></span>
+            <span class="form-line-title"><input type="submit" value="{% trans %}Sing up{% endtrans %}"/></span>
         </div>
     </div>
   </form>

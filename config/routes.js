@@ -5,19 +5,18 @@ function checkLogin(req, res, next) {
         }
         next();
     } else {
-        res.redirect('/auth/login');
+        res.redirect('/user/add');
     }
 }
 
 module.exports = function (router) {
-    var homeController = require('../controllers/home-controller');
     var authController = require('../controllers/auth-controller');
     var userController = require('../controllers/user-controller');
     var friendController = require('../controllers/friend-controller');
     var wallController = require('../controllers/wall-controller');
 
     router.route('/')
-    .get(homeController.index);
+    .get(checkLogin, wallController.index);
 
     router.route('/auth/login')
     .get(authController.loginGet)
