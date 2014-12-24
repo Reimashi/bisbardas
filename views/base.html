@@ -9,11 +9,11 @@
     <a href="{{ baseurl }}" title="{% trans %}Home{% endtrans %}"><title>Bisbardas{% if title %} - {{ title }}{% endif %}</title></a>
     <link href="{{ baseurl }}static/css/common.css" rel=stylesheet type="text/css" />
     {% for script in csscripts %}
-    <link href="{{ script }}" rel=stylesheet type="text/css" />
+    <link href="{{ baseurl }}static/css/{{ script }}" rel=stylesheet type="text/css" />
     {% endfor %}
     <script type="text/javascript" src="{{ baseurl }}static/js/jquery-2.min.js"></script>
     {% for script in jscripts %}
-    <script type="text/javascript" src="{{ script }}"></script>
+    <script type="text/javascript" src="{{ baseurl }}static/js/{{ script }}"></script>
     {% endfor %}
   </head>
   <body>
