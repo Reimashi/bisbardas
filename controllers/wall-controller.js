@@ -25,7 +25,7 @@ exports.index = function(req, res) {
 		res.send(baseweb({baseurl: baseurl, content: postsRenders, user: req.session.user}));
 		res.end();
 	});
-}
+};
 
 // Metodo POST, solo redirecciones
 exports.addPost = function(req, res) {
@@ -45,7 +45,7 @@ exports.addPost = function(req, res) {
 			res.end();
 		}
 	});
-}
+};
 
 // TODO: Añade un nuevo post (Wall). Imprime el formulario.
 // FIXME: Por alguna razon hay un "object Object" por ahi metido
@@ -59,7 +59,7 @@ exports.addPostForm = function(req, res) {
 	res.status(200);
 	res.send(baseweb({content: piecenewpost, baseurl: baseurl}));
 	res.end();
-}
+};
 
 exports.getPost = function(req, res) {
 	var baseweb = swig.compileFile('views/base.html');
@@ -80,7 +80,7 @@ exports.getPost = function(req, res) {
 			}
 		}
 	);
-}
+};
 
 // Elimina una entrada en modo asincrono
 exports.deletePost = function(req, res) {
@@ -98,7 +98,7 @@ exports.deletePost = function(req, res) {
 				}
 			}
 	});
-}
+};
 
 // Añade un like en modo asincrono
 exports.addLike = function(req, res) {
@@ -110,10 +110,10 @@ exports.addLike = function(req, res) {
 				else {
 					res.status(200).end();
 				}
-			}
+			});
 		}
 	});
-}
+};
 
 // Borra un like en modo asíncrono.
 exports.deleteLike = function(req, res) {
@@ -125,7 +125,7 @@ exports.deleteLike = function(req, res) {
 				else {
 					res.status(200).end();
 				}
-			}
+			});
 		}
 	});
-}
+};
