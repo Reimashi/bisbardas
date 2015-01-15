@@ -47,8 +47,7 @@ module.exports = function (router) {
     router.route('/users/list/:page')
     .get(checkLogin, userController.usersListGet);
 
-    router.route('/friends')
-    .get(checkLogin, friendController.index)
+    router.route('/friends/add/:id')
     .post(checkLogin, friendController.add);
 
     router.route('/friends/accept/:id')
