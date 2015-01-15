@@ -16,12 +16,15 @@ friendSchema.methods = {
     ignore: function (cb) {
         this.ignored = true;
         this.save(cb);
+    },
+    unignore: function (cb) {
+      this.ignored = false;
+      this.save(cb);
     }
 };
 
 friendSchema.statics = {
     list: function (user, cb) {
-      console.log("pasado: " + user);
         this.find({ user: user }).exec(cb);
     }
 };
