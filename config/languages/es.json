@@ -44,5 +44,14 @@
 	"Las contraseñas deben coincidir.": "Las contraseñas deben coincidir.",
 	"El Nombre no puede estar vacio": "El Nombre no puede estar vacio",
 	"Los apellidos no pueden estar vacios": "Los apellidos no pueden estar vacios",
-	"Publish a new post": "Publicar un post nuevo"
+	"Publish a new post": "Publicar un post nuevo",
+	"The email address isn't valid.": "The email address isn't valid.",
+	"The password should have between 6 and 24 characters.": "The password should have between 6 and 24 characters.",
+	"The passwords don't match.": "The passwords don't match.",
+	"You should specify a firstname.": "You should specify a firstname.",
+	"You should specify a lastname.": "You should specify a lastname.",
+	"Sing up": "Sing up",
+	"Wall": "Wall",
+	"Search": "Search",
+	"User image": "User image"
 }

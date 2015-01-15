@@ -15,7 +15,7 @@ exports.index = function(req, res) {
   var pieceFriend = swig.compileFile('views/piece-friend.html');
 
   var listRes;
-  friendModel.list(sampleUser,function (err, friends) {
+  friendModel.list(req.session.user._id,function (err, friends) {
     console.log("amigos: " + friends);
     listRes = Array();
     friends.forEach(function(friend) {

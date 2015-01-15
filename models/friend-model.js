@@ -17,16 +17,17 @@ friendSchema.methods = {
         this.ignored = true;
         this.save(cb);
     }
-}
+};
 
 friendSchema.statics = {
     list: function (user, cb) {
-        this.find({ user: user._id }).exec(cb);
+      console.log("pasado: " + user);
+        this.find({ user: user }).exec(cb);
     }
-}
+};
 
 mongoose.model('Friend', friendSchema);
 
 module.exports = function () {
     return mongoose.model('Friend');
-}
+};
