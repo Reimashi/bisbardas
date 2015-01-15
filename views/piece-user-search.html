@@ -3,7 +3,7 @@
 {% endif %}
 
 <div class="bb-post bb-search-user">
-  <form>
+  <form method="POST" action="{{baseurl}}/users/search">
     <span><input type="text" name="search-user"/></span>
     <span><input type="submit" value="{% trans %}Search{% endtrans %}"/></span>
   </form>
