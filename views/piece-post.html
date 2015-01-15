@@ -2,44 +2,50 @@
   {% set baseurl = '' %}
 {% endif %}
 
-<div class="bb-post">
-  <div class="post-image">
-    <img src="{% if info.image %}{{ baseurl }}static/img-upload/{{ info.image }}{% else %}{{ baseurl }}static/img/default-post.png{% endif %}">
+<div class="bp-post">
+  <div class="bp-post-title">
+    <div class="bp-post-photo">
+      <img src="{% if user.photo %}{{ baseul }}{{ user.photo }}{% else %}{{ baseurl }}static/img/default-user.png{% endif %}" alt="{% trans %}User image{% endtrans %}"/>
+    </div>
+    <div class="bp-post-info">
+      <div class="bp-post-info-title">{{ info.title }}</div>
+      <div class="bp-post-info-name">{{ info.author.name.fullname }}</div>
+    </div>
+    <div class="bp-post-date">{{ info.createdAt.toDateString() }}</div>
+    <div class="clear-float"></div>
   </div>
-  <div class="post-body">
-    <div class="title">
-      {{ info.title }}
-    </div>
-    <div class="content">
-      <div class="ctext">
-        <p>{{ info.body }}</p>
-      </div>
-    </div>
-    <div class="social">
-        <span class="social-button"><a href="{{ baseurl }}post/delete/{{ info.id }}" class="button red-button">{% trans %}Delete{% endtrans %}</a></span>
+  {% if info.img %}
+  <div class="bp-post-image">
+    <img  src="{% if info.img %}{{ baseurl }}static/img-upload/{{ info.img }}{% else %}{{ baseurl }}static/img/default-post.png{% endif %}">
+  </div>
+  {% endif %}
+  <div class="bp-post-body">
+    <div class="bp-post-body-text">{{ info.body }}</div>
+  </div>
+  <div class="bp-post-social">
+    <span class="social-button"><a href="#{{ info.id }}" class="button red-button delete-button">{% trans %}Delete{% endtrans %}</a></span>
+    {% if userlike %}
+    <span class="social-button"><a href="#{{ info.id }}" class="button unlike-button">{% trans %}I don't like this anymore{% endtrans %}</a></span>
+    {% else %}
+    <span class="social-button"><a href="#{{ info.id }}" class="button like-button">{% trans %}Like it{% endtrans %}</a></span>
+    {% endif %}
+    <span class="social-resume">
       {% if userlike %}
-      <span class="social-button"><a href="{{ baseurl }}post/unlike/{{ info.id }}" class="button">{% trans %}I don't like this anymore{% endtrans %}</a></span>
-      {% else %}
-      <span class="social-button"><a href="{{ baseurl }}post/like/{{ info.id }}" class="button">{% trans %}Like it{% endtrans %}</a></span>
-      {% endif %}
-      <span class="social-resume">
-        {% if userlike %}
-          {% if likes < 1 %}
-            A ti te gusta esto.
-          {% elseif likes == 1 %}
-            A ti y a 1 persona más os gusta esto.
-          {% elseif likes > 1 %}
-            A ti y a {{ likes }} personas más os gusta esto.
-          {% endif %}
-        {% else %}
-          {% if likes == 1 %}
-            A 1 persona le gusta esto.
-          {% elseif likes > 1 %}
-            A {{ likes }} personas les gusta esto.
-          {% endif %}
+        {% if info.likes < 1 %}
+          A ti te gusta esto.
+        {% elseif info.likes == 1 %}
+          A ti y a 1 persona más os gusta esto.
+        {% elseif info.likes > 1 %}
+          A ti y a {{ info.likes }} personas más os gusta esto.
         {% endif %}
-      </span>
-    </div>
+      {% else %}
+        {% if info.likes == 1 %}
+          A 1 persona le gusta esto.
+        {% elseif info.likes > 1 %}
+          A {{ info.likes }} personas les gusta esto.
+        {% endif %}
+      {% endif %}
+    </span>
+    <div class="clear-float"></div>
   </div>
-  <div class="clear-float"></div>
 </div>

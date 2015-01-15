@@ -281,6 +281,93 @@ float: left;
 	text-decoration: none;
 }
 
+/* ********* Estilo de bisbardas - Post en el muro ***** */
+
+.bp-post {
+	width: 600px;
+	margin: 12px auto;
+	background: #fff;
+	border: 1px solid #c6c6c6;
+	box-shadow: 2px 2px 3px #999;
+	position:relative;
+	z-index: 1;
+}
+
+.bp-post .bp-post-title {
+	background: #f8f8ff;
+	border-bottom: 1px solid #ccc;
+}
+
+.bp-post .bp-post-photo {
+	float: left;
+	width: 44px;
+	margin: 0px 6px;
+}
+
+.bp-post .bp-post-info {
+	float: left;
+	max-width: 400px;
+	margin: 6px 16px;
+}
+
+.bp-post .bp-post-date {
+	margin: 12px 16px;
+	float: right;
+	max-width: 120px;
+	font-size: 0.9em;
+	color: #444;
+}
+
+.bp-post .bp-post-photo img {
+	margin: 4px 16px 4px 4px;
+	width: 36px;
+	height: 36px;
+	border-radius: 18px;
+	box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+}
+
+.bp-post .bp-post-info-title {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.bp-post .bp-post-info-name {
+	font-size: 0.9em;
+	color: #666;
+}
+
+.bp-post-image {
+	background: #555;
+	border-bottom: 1px solid #ccc;
+}
+
+.bp-post-image img {
+	max-height: 280px;
+	max-width: 280px;
+}
+
+.bp-post-body {
+	padding: 12px 16px;
+	border-bottom: 1px solid #ccc;
+}
+
+.bp-post-body .bp-post-body-text {
+}
+
+.bp-post-social {
+	background: #f8f8ff;
+}
+
+.bp-post-social .social-resume {
+	float: left;
+	margin: 12px 10px;
+}
+
+.bp-post-social .social-button {
+	margin: 12px 4px;
+	float: right;
+}
+
 /* ********* Estilo de bisbardas - Entrada en el muro ***** */
 
 .bb-post {

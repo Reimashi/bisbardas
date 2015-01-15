@@ -65,6 +65,7 @@ postSchema.statics = {
                 .where('author')
                 .in(friendids)
                 .limit(limit)
+                .populate('author')
                 .sort({'createdAt': -1})
                 .skip(limit * step)
                 .exec(cb);
