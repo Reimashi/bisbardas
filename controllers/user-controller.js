@@ -175,7 +175,7 @@ exports.usersListGet = function(req, res) {
       usuarios.forEach(function(usuario) {
 				var opt = [{
 						name: i18n.__('Add friend'),
-						url: baseurl + 'friend/add/' + usuario._id
+						url: baseurl + 'friends/add/' + usuario._id
 					}];
 
 				usuariosRenders.push(pieceUser({ baseurl: baseurl, user: usuario, options: opt}));
