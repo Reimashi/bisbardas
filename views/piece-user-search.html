@@ -1,0 +1,10 @@
+{% if not baseurl %}
+{% set baseurl = '' %}
+{% endif %}
+
+<div class="bb-post bb-search-user">
+  <form>
+    <span><input type="text" name="search-user"/></span>
+    <span><input type="submit" value="{% trans %}Search{% endtrans %}"/></span>
+  </form>
+</div>

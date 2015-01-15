@@ -16,9 +16,15 @@ var userSchema = new Schema ({
   registered: { type: Date, default: Date.now, required: true }
 });
 
-userSchema.virtual('name.full').get(function () {
+userSchema.virtual('name.fullname').get(function () {
   return this.name.first + ' ' + this.name.last;
 });
+
+userSchema.statics = {
+    list: function (step, limit, cb) {
+        this.find().skip(step * limit).limit(limit).exec(cb);
+    }
+}
 
 userSchema.path('email').validate(function(value, done) {
     this.model('User').count({ email: value }, function(err, count) {

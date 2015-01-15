@@ -1,0 +1,18 @@
+{% if not baseurl %}
+{% set baseurl = '' %}
+{% endif %}
+
+<div class="bb-user-info bb-post">
+  <div class="uin-photo">
+    <img src="{% if user.photo %}{{ baseurl }}{{ user.photo }}{% else %}{{ baseurl }}static/img/default-user.png{% endif %}" alt="{% trans %}User image{% endtrans %}"/>
+  </div>
+  <div class="uin-info-name">{{ user.name.fullname }}</div>
+  <div class="uin-info-options">
+    {% if options %}
+      {% for option in options %}
+        <div class="ui-option"><a href="{{ option.url }}" class="button">{{ option.name }}</a></div>
+      {% endfor %}
+    {% endif %}
+  </div>
+  <div class="clear-float"></div>
+</div>

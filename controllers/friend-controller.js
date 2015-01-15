@@ -30,28 +30,6 @@ exports.index = function(req, res) {
   });
 };
 
-exports.users = function(req, res) {
-  var baseweb = swig.compileFile('views/base.html');
-  var pieceFriend = swig.compileFile('views/piece-friend.html');
-
-  var usuariosRenders = Array();
-  userModel.find({}, function(err, usuarios) {
-    if (!err){
-      usuarios.forEach(function(usuario) {
-        if(!usuario._id.equals(req.session.user._id)){
-          console.log(usuario);
-          usuariosRenders.push(pieceFriend(usuario));
-        }
-      });
-      res.status(200);
-      res.send(baseweb({'content' : usuariosRenders, user: req.session.user}));
-      res.end();
-    }
-    else { throw err;}
-    }
-  );
-};
-
 // TODO: Añade una peticion de amistad
 exports.add = function(req, res) {
   var amigo = new friendModel ({

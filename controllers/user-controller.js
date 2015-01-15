@@ -161,6 +161,35 @@ exports.modifyPost = function(req, res) {
 	}
 }
 
+exports.usersListGet = function(req, res) {
+	var baseurl = 'http://' + req.headers.host + '/';
+  var baseweb = swig.compileFile('views/base.html');
+	var pieceUser = swig.compileFile('views/piece-user.html');
+	var pieceUserSearch = swig.compileFile('views/piece-user-search.html');
+
+  userModel.list( 0, 10, function(err, usuarios) {
+    if (!err){
+			var usuariosRenders = Array();
+			usuariosRenders.push(pieceUserSearch({ baseurl: baseurl }));
+
+      usuarios.forEach(function(usuario) {
+				var opt = [{
+						name: i18n.__('Add friend'),
+						url: baseurl + 'friend/add/' + usuario._id
+					}];
+
+				usuariosRenders.push(pieceUser({ baseurl: baseurl, user: usuario, options: opt}));
+      });
+
+      res.status(200);
+      res.send(baseweb({'content' : usuariosRenders, user: req.session.user, baseurl: baseurl}));
+      res.end();
+    }
+    else { throw err; }
+    }
+  );
+};
+
 // TODO: Borra un usuario (el actual)
 exports.delete = function(req, res) {
 	//obtener el usuario de algun modo y...
