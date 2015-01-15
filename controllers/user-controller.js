@@ -167,7 +167,7 @@ exports.usersListGet = function(req, res) {
 	var pieceUser = swig.compileFile('views/piece-user.html');
 	var pieceUserSearch = swig.compileFile('views/piece-user-search.html');
 
-  userModel.list( 0, 10, function(err, usuarios) {
+  userModel.list( req.session.user, 0, 10, function(err, usuarios) {
     if (!err){
 			var usuariosRenders = Array();
 			usuariosRenders.push(pieceUserSearch({ baseurl: baseurl }));

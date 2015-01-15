@@ -21,8 +21,8 @@ userSchema.virtual('name.fullname').get(function () {
 });
 
 userSchema.statics = {
-    list: function (step, limit, cb) {
-        this.find().skip(step * limit).limit(limit).exec(cb);
+    list: function (user, step, limit, cb) {
+        this.find().nor({ _id: user._id }).skip(step * limit).limit(limit).exec(cb);
     }
 }
 
