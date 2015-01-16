@@ -53,12 +53,17 @@ postSchema.statics = {
         friendModel = mongoose.model('Friend');
         postModel = this;
 
-        friendModel.find({ user: user._id, acepted: true }).exec(function (err, friends) {
+        friendModel.find().or([{ user: user._id, userState: "accepted", friendState: "accepted" }, { friend: user._id, userState: "accepted", friendState: "accepted" }]).exec(function (err, friends) {
             var friendids = [];
             friendids.push(user._id);
 
             friends.forEach(function(friend) {
+              if (friend.user == user._id) {
                 friendids.push(friend.friend);
+              }
+              else {
+                friendids.push(friend.user);
+              }
             });
 
             postModel.find({})
