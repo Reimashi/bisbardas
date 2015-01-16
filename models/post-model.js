@@ -35,7 +35,14 @@ postSchema.methods = {
     },
 
     deleteLike:function (user, cb) {
-      this.likes.findOne({ user: user.param('id') }).remove();
+      var newlikes = Array();
+      this.likes.forEach(function(like) {
+        if (like.user != user._id) {
+          newlikes.push;
+        }
+      });
+      this.likes = newlikes;
+      this.save();
     }
 };
 
