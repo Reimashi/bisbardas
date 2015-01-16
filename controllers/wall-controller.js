@@ -18,7 +18,13 @@ exports.index = function(req, res) {
 
 	postModel.list(req.session.user, 20, 0, function (err, posts) {
 		posts.forEach(function(post) {
-			postsRenders.push(piecepost({baseurl: baseurl, info: post}));
+			var userlikev = false;
+			post.likes.forEach(function(like) {
+				if (like.user == req.session.user._id) {
+					userlikev = true;
+				}
+			});
+			postsRenders.push(piecepost({baseurl: baseurl, info: post, user: req.session.user, userlike: userlikev}));
 		});
 
 		res.status(200);
@@ -109,7 +115,6 @@ exports.deletePost = function(req, res) {
 
 // Añade un like en modo asincrono
 exports.addLike = function(req, res) {
-	console.log('AddLike');
 	var baseurl = 'http://' + req.headers.host + '/';
 	var baseweb = swig.compileFile('views/base.html');
 	var piecenewpost = swig.compileFile('views/form-newpost.html');
@@ -128,7 +133,6 @@ exports.addLike = function(req, res) {
 
 // Borra un like en modo asíncrono.
 exports.deleteLike = function(req, res) {
-	console.log('DelLike');
 	var baseurl = 'http://' + req.headers.host + '/';
 	var baseweb = swig.compileFile('views/base.html');
 	var piecenewpost = swig.compileFile('views/form-newpost.html');
