@@ -28,25 +28,16 @@ postSchema.methods = {
     },
 
     addLike: function (user, cb) {
-        var index = utils.indexof(this.likes, { user: user._id });
-
-        if (~index) return cb('Este usuario ya le habia dado a like.');
-        else {
-            this.likes.push({
-                user: user._id
-            });
-            this.save(cb);
-        }
+      this.likes.push({
+        user: user._id
+      });
+      this.save(cb);
     },
 
     deleteLike:function (user, cb) {
-        var index = utils.indexof(this.likes, { user: user._id });
-
-        if (~index) this.comments.splice(index, 1);
-        else return cb('Este usuario no le habia dado a like.');
-        this.save(cb);
+      this.likes.findOne({ user: user.param('id') }).remove();
     }
-}
+};
 
 postSchema.statics = {
     list: function (user, limit, step, cb) {
@@ -76,10 +67,10 @@ postSchema.statics = {
                 .exec(cb);
         });
     }
-}
+};
 
 mongoose.model('Post', postSchema);
 
 module.exports = function () {
     return mongoose.model('Post');
-}
+};

@@ -114,7 +114,7 @@ exports.addLike = function(req, res) {
 	postModel.findOne({_id: req.param('id')}, function (err, post) {
 		if (err) res.status(404).end();
 		else {
-			post.deleteLike(req.session.user, function (err) {
+			post.addLike(req.session.user, function (err) {
 				if (err) res.status(401).end();
 				else {
 					res.status(200).end();

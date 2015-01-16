@@ -75,8 +75,8 @@ module.exports = function (router) {
     .get(checkLogin, wallController.deletePost);
 
     router.route('/post/like/:id')
-    .get(checkLogin, wallController.deletePost);
+    .get(checkLogin, wallController.addLike);
 
     router.route('/post/unlike/:id')
-    .get(checkLogin, wallController.deletePost);
-}
+    .get(checkLogin, wallController.deleteLike);
+};
