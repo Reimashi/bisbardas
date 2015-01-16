@@ -92,16 +92,18 @@ exports.deletePost = function(req, res) {
 			else {
 				if (post.author == req.session.user._id) {
 					postModel.findOne({ _id: req.param('id') }).remove(function(err, post) {
-						if (err) res.status(500).end();
-						res.status(200).end;
+						if (err) {
+							res.status(500).end();
+						}
+						else {
+							res.redirect(baseurl + 'wall');
+						}
 					});
 				}
 				else {
 					res.status(401).end();
 				}
 			}
-			var baseurl = 'http://' + req.headers.host + '/';
-			res.redirect(baseurl + 'wall');
 	});
 };
 
@@ -117,12 +119,10 @@ exports.addLike = function(req, res) {
 			post.addLike(req.session.user, function (err) {
 				if (err) res.status(500).end();
 				else {
-					res.status(200).end();
+					res.redirect(baseurl + 'wall');
 				}
 			});
 		}
-		var baseurl = 'http://' + req.headers.host + '/';
-		res.redirect(baseurl + 'wall');
 	});
 };
 
@@ -138,11 +138,9 @@ exports.deleteLike = function(req, res) {
 			post.deleteLike(req.session.user, function (err) {
 				if (err) res.status(500).end();
 				else {
-					res.status(200).end();
+					res.redirect(baseurl + 'wall');
 				}
 			});
 		}
-		var baseurl = 'http://' + req.headers.host + '/';
-		res.redirect(baseurl + 'wall');
 	});
 };
