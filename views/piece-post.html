@@ -23,7 +23,7 @@
     <div class="bp-post-body-text">{{ info.body }}</div>
   </div>
   <div class="bp-post-social">
-    <span class="social-button"><a href="#{{ info.id }}" class="button red-button delete-button">{% trans %}Delete{% endtrans %}</a></span>
+    <span class="social-button"><a href="{{ baseurl }}post/delete/{{ info.id }}" class="button red-button delete-button">{% trans %}Delete{% endtrans %}</a></span>
     {% if userlike %}
     <span class="social-button"><a href="#{{ info.id }}" class="button unlike-button">{% trans %}I don't like this anymore{% endtrans %}</a></span>
     {% else %}
