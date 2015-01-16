@@ -47,21 +47,20 @@ module.exports = function (router) {
     router.route('/users/list/:page')
     .get(checkLogin, userController.usersListGet);
 
-    router.route('/friends')
-    .get(checkLogin, friendController.index);
+    router.route('/friends/list')
+    .get(checkLogin, friendController.list);
 
     router.route('/friends/add/:id')
     .get(checkLogin, friendController.add)
     .post(checkLogin, friendController.add);
 
     router.route('/friends/accept/:id')
-    .get(checkLogin, friendController.accept);
+    .get(checkLogin, friendController.accept)
+    .post(checkLogin, friendController.accept);
 
     router.route('/friends/ignore/:id')
-    .get(checkLogin, friendController.ignore);
-
-    router.route('/friends/delete/:id')
-    .get(checkLogin, friendController.delete);
+    .get(checkLogin, friendController.ignore)
+    .post(checkLogin, friendController.ignore);
 
     router.route('/wall')
     .get(checkLogin, wallController.index);
