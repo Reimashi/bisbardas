@@ -54,5 +54,7 @@
 	"Wall": "Wall",
 	"Search": "Search",
 	"User image": "User image",
-	"Delete": "Delete"
+	"Delete": "Delete",
+	"Ignore": "Ignore",
+	"Accept": "Accept"
 }

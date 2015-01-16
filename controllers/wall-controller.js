@@ -18,13 +18,7 @@ exports.index = function(req, res) {
 
 	postModel.list(req.session.user, 20, 0, function (err, posts) {
 		posts.forEach(function(post) {
-			var userlikev = false;
-			post.likes.forEach(function(like) {
-				if (like.user == req.session.user._id) {
-					userlikev = true;
-				}
-			});
-			postsRenders.push(piecepost({baseurl: baseurl, info: post, user: req.session.user, userlike: userlikev}));
+			postsRenders.push(piecepost({baseurl: baseurl, info: post}));
 		});
 
 		res.status(200);
@@ -106,8 +100,8 @@ exports.deletePost = function(req, res) {
 					res.status(401).end();
 				}
 			}
-			res.send(baseweb({content: piecenewpost, baseurl: baseurl}));
-			res.end();
+			var baseurl = 'http://' + req.headers.host + '/';
+			res.redirect(baseurl + 'wall');
 	});
 };
 
@@ -121,14 +115,14 @@ exports.addLike = function(req, res) {
 		if (err) res.status(404).end();
 		else {
 			post.addLike(req.session.user, function (err) {
-				if (err) res.status(401).end();
+				if (err) res.status(500).end();
 				else {
 					res.status(200).end();
 				}
 			});
 		}
-		res.send(baseweb({content: piecenewpost, baseurl: baseurl}));
-		res.end();
+		var baseurl = 'http://' + req.headers.host + '/';
+		res.redirect(baseurl + 'wall');
 	});
 };
 
@@ -142,13 +136,13 @@ exports.deleteLike = function(req, res) {
 		if (err) res.status(404).end();
 		else {
 			post.deleteLike(req.session.user, function (err) {
-				if (err) res.status(401).end();
+				if (err) res.status(500).end();
 				else {
 					res.status(200).end();
 				}
 			});
 		}
-		res.send(baseweb({content: piecenewpost, baseurl: baseurl}));
-		res.end();
+		var baseurl = 'http://' + req.headers.host + '/';
+		res.redirect(baseurl + 'wall');
 	});
 };
