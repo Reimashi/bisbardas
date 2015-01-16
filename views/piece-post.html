@@ -31,18 +31,20 @@
     {% endif %}
     <span class="social-resume">
       {% if userlike %}
-        {% if info.likes < 1 %}
+        {% if info.likes.length == 1 %}
           A ti te gusta esto.
-        {% elseif info.likes == 1 %}
+        {% elseif info.likes.length == 2 %}
           A ti y a 1 persona más os gusta esto.
-        {% elseif info.likes > 1 %}
-          A ti y a {{ info.likes }} personas más os gusta esto.
+        {% elseif info.likes.length > 1 %}
+          A ti y a {{ info.likes.length - 1 }} personas más os gusta esto.
         {% endif %}
       {% else %}
-        {% if info.likes == 1 %}
+        {% if info.likes.length == 1 %}
           A 1 persona le gusta esto.
-        {% elseif info.likes > 1 %}
-          A {{ info.likes }} personas les gusta esto.
+        {% elseif info.likes.length > 1 %}
+          A {{ info.likes.length }} personas les gusta esto.
+        {% else %}
+          A nadie le gusta esto.
         {% endif %}
       {% endif %}
     </span>

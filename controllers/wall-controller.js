@@ -18,7 +18,13 @@ exports.index = function(req, res) {
 
 	postModel.list(req.session.user, 20, 0, function (err, posts) {
 		posts.forEach(function(post) {
-			postsRenders.push(piecepost({baseurl: baseurl, info: post}));
+			var userlikev = false;
+			post.likes.forEach(function(like) {
+				if (like.user == req.session.user._id) {
+					userlikev = true;
+				}
+			});
+			postsRenders.push(piecepost({baseurl: baseurl, info: post, user: req.session.user, userlike: userlikev}));
 		});
 
 		res.status(200);
