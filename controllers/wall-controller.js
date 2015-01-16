@@ -84,11 +84,14 @@ exports.getPost = function(req, res) {
 
 // Elimina una entrada en modo asincrono
 exports.deletePost = function(req, res) {
+	var baseurl = 'http://' + req.headers.host + '/';
+	var baseweb = swig.compileFile('views/base.html');
+	var piecenewpost = swig.compileFile('views/form-newpost.html');
 	postModel.findOne({ _id: req.param('id') }, function (err, post) {
 			if (err) res.status(404).end();
 			else {
-				if (post.author == req.session.user.id) {
-					postModel.findOne({ _id: req.param('id') }).remove(function(err) {
+				if (post.author == req.session.user._id) {
+					postModel.findOne({ _id: req.param('id') }).remove(function(err, post) {
 						if (err) res.status(500).end();
 						res.status(200).end;
 					});
@@ -97,11 +100,17 @@ exports.deletePost = function(req, res) {
 					res.status(401).end();
 				}
 			}
+			res.send(baseweb({content: piecenewpost, baseurl: baseurl}));
+			res.end();
 	});
 };
 
 // Añade un like en modo asincrono
 exports.addLike = function(req, res) {
+	console.log('AddLike');
+	var baseurl = 'http://' + req.headers.host + '/';
+	var baseweb = swig.compileFile('views/base.html');
+	var piecenewpost = swig.compileFile('views/form-newpost.html');
 	postModel.findOne({_id: req.param('id')}, function (err, post) {
 		if (err) res.status(404).end();
 		else {
@@ -112,11 +121,17 @@ exports.addLike = function(req, res) {
 				}
 			});
 		}
+		res.send(baseweb({content: piecenewpost, baseurl: baseurl}));
+		res.end();
 	});
 };
 
 // Borra un like en modo asíncrono.
 exports.deleteLike = function(req, res) {
+	console.log('DelLike');
+	var baseurl = 'http://' + req.headers.host + '/';
+	var baseweb = swig.compileFile('views/base.html');
+	var piecenewpost = swig.compileFile('views/form-newpost.html');
 	postModel.findOne({_id: req.param('id')}, function (err, post) {
 		if (err) res.status(404).end();
 		else {
@@ -127,5 +142,7 @@ exports.deleteLike = function(req, res) {
 				}
 			});
 		}
+		res.send(baseweb({content: piecenewpost, baseurl: baseurl}));
+		res.end();
 	});
 };
