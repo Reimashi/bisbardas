@@ -530,3 +530,8 @@ a.red-button {
 	line-height: 60px;
 	float: right;
 }
+
+.uin-info-options .ui-option {
+	float: right;
+	margin: 0px 3px;
+}
